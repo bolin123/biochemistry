@@ -15,11 +15,10 @@ typedef struct
 
 typedef struct
 {
-	uint8_t index : 6;
-	uint8_t status : 1;
-	uint8_t dir : 1;
-	uint8_t count;
-}motorCtrl_t;
+	uint8_t id;
+	uint8_t dir;
+	uint16_t count;
+}MProtoStep_t;
 								 
 #define MPROTO_CMD_BROADCAST 0x00
 #define MPROTO_CMD_SELF_CHECK 0x01

@@ -6,6 +6,7 @@
 HalPulseInfo_t g_pulseConfig[HAL_PULSE_INFO_NUM];
 static uint8_t g_pulseCount[2];
 static uint32_t g_timerCount = 0;
+static MotorStepOver_cb g_pluseStepOverCb = NULL;
 
 void HalGpioPinValueSet(uint8_t io, uint8_t val)
 {
@@ -155,8 +156,7 @@ HalPulseInfo_t * HalPulseInfoGet(uint8_t index)
 	return &g_pulseConfig[index];
 }
 
-int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, 
-	uint8_t count, bool enable, motorCountOver_cb cb)
+int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint8_t count, bool enable)
 {
 	if(index >= HAL_PULSE_INFO_NUM)
 	{
@@ -167,7 +167,7 @@ int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir,
 	g_pulseConfig[index].count = count;
 	g_pulseConfig[index].curNum = 0;
 	g_pulseConfig[index].dir = dir;
-	g_pulseConfig[index].cb = cb;
+//	g_pulseConfig[index].cb = cb;
 	if(enable)
 	{		
 		if(dir == MOTOR_DIR_FORWARD)
@@ -197,10 +197,12 @@ int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir,
 	period: x ms
 */
 
-void HalPulseStart(uint32_t period)
+void HalPulseStart(uint32_t period, MotorStepOver_cb cb)
 {
 	float count = 11059200/12/(period*1000);
 	uint32_t timeCount = (uint32_t)count;
+	
+	g_pluseStepOverCb = cb;
 
 	g_pulseCount[1] = (0xffff - timeCount)/0xff;
 	g_pulseCount[0] = (0xffff - timeCount)%0xff;
@@ -227,9 +229,9 @@ void Time1_Int() interrupt 3
 		{
 			if(g_pulseConfig[i].count != 0 && g_pulseConfig[i].curNum >= g_pulseConfig[i].count)
 			{
-				if(g_pulseConfig[i].cb != NULL)
+				if(g_pluseStepOverCb != NULL)
 				{
-					g_pulseConfig[i].cb(i);
+					g_pluseStepOverCb(i);
 				}
 			}
 			else

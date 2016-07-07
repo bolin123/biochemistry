@@ -8,13 +8,6 @@
 #define MPROTO_FRAME_PREAMBLE  0xbc
 #define MPROTO_DEFAULT_HOST_ADDR 0xfe
 
-typedef struct
-{
-	uint8_t id;
-	uint8_t dir;
-	uint16_t count;
-}Step_t;
-
 static bool g_frameRecved = false;
 static uint8_t g_frameBuffer[MPROTO_FRAME_BUFFER_LEN] = {0};
 static uint8_t g_frameDataCount = 0;
@@ -23,7 +16,7 @@ static uint32_t	g_broadcastTime = 0;
 static bool g_broadcastFlag = false;
 static SysEvent_cb g_eventCb = NULL;
 static uint8_t g_controlIndex = 0;
-static Step_t g_steps[MAX_STEPS_COUNT];
+static MProtoStep_t g_steps[MAX_STEPS_COUNT];
 
 static uint8_t checkFrame(const uint8_t *dat, uint8_t len)
 {

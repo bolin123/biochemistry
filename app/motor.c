@@ -9,11 +9,19 @@
 #define MOTOR2_DIRECTION_PIN 0x24	//电机2方向管脚 p16
 
 static uint8_t g_motorNum = 0;
-static MotorStopEvent_cb g_stopEvent[MOTOR_NUM] = {0};
+static MotorSensorTriggered g_sensorTriggered[MOTOR_NUM] = {0};
+static MotorEventHandle g_eventCb = NULL;
 
-void MotorInit(void)
+static void motorStepOverHandle(uint8_t id)
+{
+	g_eventCb(id, MOTOR_EVENT_STEP_OVER);
+}
+
+void MotorInit(MotorEventHandle cb)
 {
 	HalPulseInfo_t info;
+
+	g_eventCb = cb;
 	//MOTOR_INDEX_NUM1
 	info.enable = false;
 	info.val = 0;
@@ -31,25 +39,25 @@ void MotorInit(void)
 	HalPulseInfoInit(1, &info);
 	g_motorNum++;
 	
-	HalPulseStart(1);// 2ms
+	HalPulseStart(1, motorStepOverHandle);// 2ms
 }
 
-void MotorStopEventRegister(uint8_t index, MotorStopEvent_cb cb)
+void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb)
 {
-	g_stopEvent[index] = cb;
+	g_sensorTriggered[index] = cb;
 }
 
-void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count, motorCountOver_cb cb)
+void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count)
 {
 	HalIRQEnableSet(false);
-	HalPulseInfoSet(index, dir, count, true, cb);
+	HalPulseInfoSet(index, dir, count, true);
 	HalIRQEnableSet(true);
 }
 
 void MotorStop(uint8_t index)
 {
 	HalIRQEnableSet(false);
-	HalPulseInfoSet(index, 0, 0, false, NULL);
+	HalPulseInfoSet(index, 0, 0, false);
 	HalIRQEnableSet(true);
 }
 
@@ -60,38 +68,10 @@ void MotorPoll(void)
 	
 	for(i = 0; i < MOTOR_NUM; i++)
 	{
-		if(g_stopEvent[i] != NULL && g_stopEvent[i]())
+		if(g_sensorTriggered[i] != NULL && g_sensorTriggered[i]())
 		{
-			info = HalPulseInfoGet(i);
-		
-			if(info->enable)
-			{
-				MotorStop(i);
-			}
-			
+			g_eventCb(i, MOTOR_EVENT_SENSOR_TRIGGERED);
 		}
 	}
-	#if 0
-	static bool isStop1 = false;
-	static bool isStop2 = false;
-	
-	if(HalGpioPinValueGet(0x00) == 0)
-	{
-        if(!isStop1)
-        {
-            isStop1 = true;
-            MotorStop(0);
-        }
-	}
-
-	if(HalGpioPinValueGet(0x01))
-	{
-		if(!isStop2)
-		{
-			isStop2 = true;
-			MotorStop(1);
-		}
-	}
-	#endif
 }
 

@@ -2,19 +2,10 @@
 #include "motor.h"
 #include "mproto.h"
 
-static void testMotorCb(uint8_t index)
-{
-	static bool isOver = false;
-	MotorStop(index);
-	HalGpioPinValueSet(0x13, isOver);
-	if(!isOver)
-	{
-		MotorStart(1, MOTOR_DIR_BACKWARD, 50, testMotorCb);
-		isOver = true;
-	}
-}
+static MProtoStep_t *g_curStepInfo = NULL;
+static uint8_t g_stepCount = 0;
 
-static bool testMotor1NeedStop(void)
+static bool sysMotor1SensorTriggered(void)
 {
 	if(HalGpioPinValueGet(0x00) == 0) //P00
 	{
@@ -23,7 +14,7 @@ static bool testMotor1NeedStop(void)
 	return false;
 }
 
-static bool testMotor2NeedStop(void)
+static bool sysMotor2SensorTriggered(void)
 {
 	if(HalGpioPinValueGet(0x01))  //P01
 	{
@@ -33,13 +24,46 @@ static bool testMotor2NeedStop(void)
 }
 
 
-static void testMotorInit(void)
+static void sysMotorInit(void)
 {
-	MotorStopEventRegister(0, testMotor1NeedStop);
-	MotorStopEventRegister(1, testMotor2NeedStop);
-	MotorStart(0, MOTOR_DIR_BACKWARD, 0, NULL);
-	MotorStart(1, MOTOR_DIR_BACKWARD, 0, NULL);
+	MotorTriggeredRegister(0, sysMotor1SensorTriggered);
+	MotorTriggeredRegister(1, sysMotor2SensorTriggered);
+	//MotorStart(0, MOTOR_DIR_BACKWARD, 0, NULL);
+	//MotorStart(1, MOTOR_DIR_BACKWARD, 0, NULL);
 	//MotorStart(1, MOTOR_DIR_BACKWARD, 50, testMotorCb);
+}
+
+static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
+{
+	bool doNextStep = false;
+	
+	if(MOTOR_EVENT_STEP_OVER == event)
+	{
+		doNextStep = true;
+	}
+	else if(MOTOR_EVENT_SENSOR_TRIGGERED == event)
+	{
+		if(g_curStepInfo->count == 0)
+		{
+			doNextStep = true;
+		}
+	}
+
+	if(doNextStep)
+	{
+		MotorStop(id);
+		if(g_stepCount == 0)
+		{
+			MProtoCtrlResult(0);
+			g_curStepInfo = NULL;
+		}
+		else
+		{
+			g_curStepInfo++;
+			g_stepCount--;
+			MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->count);
+		}
+	}
 }
 
 static void sysEventHandle(uint8_t event, void *args, uint8_t arglen)
@@ -49,6 +73,9 @@ static void sysEventHandle(uint8_t event, void *args, uint8_t arglen)
 		case SYS_EVENT_SELFCHECK:
 			break;
 		case SYS_EVENT_MOTOR_CONTRL:
+			g_curStepInfo = (MProtoStep_t *)args;
+			g_stepCount = arglen - 1;
+			MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->count);
 			break;
 		default:
 			break;
@@ -60,7 +87,7 @@ void SysInit(void)
     HalInit();
 	MProtoInit(sysEventHandle);
 	MotorInit();
-	testMotorInit();
+	sysMotorInit();
 }
 
 void SysPoll(void)

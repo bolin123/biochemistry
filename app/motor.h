@@ -9,14 +9,21 @@ typedef enum
 	MOTOR_DIR_BACKWARD,
 }MotorDirection_t;
 
-typedef void (*motorCountOver_cb)(uint8_t );
-typedef bool (*MotorStopEvent_cb)(void);
+typedef enum
+{
+	MOTOR_EVENT_STEP_OVER = 0,
+	MOTOR_EVENT_SENSOR_TRIGGERED,
+}MotorEvent_t;
 
-void MotorInit(void);
-void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count, motorCountOver_cb cb);
+typedef void (*MotorStepOver_cb)(uint8_t );
+typedef bool (*MotorSensorTriggered)(void);
+typedef void (*MotorEventHandle)(uint8_t, MotorEvent_t);
+
+void MotorInit(MotorEventHandle cb);
+void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count, MotorStepOver_cb cb);
 void MotorStop(uint8_t index);
 void MotorPoll(void);
-void MotorStopEventRegister(uint8_t index, MotorStopEvent_cb cb);
+void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb);
 
 #endif
 

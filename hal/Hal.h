@@ -16,7 +16,7 @@ typedef struct
 	uint8_t count;    //设置总步数 (0为无限)
 	uint8_t curNum;   //当前步数
 	uint8_t val;      //控制管脚高低电平
-	motorCountOver_cb cb;  //设定步数完成回调函数
+//	MotorStepOver_cb cb;  //设定步数完成回调函数
 }HalPulseInfo_t;
 
 typedef void (* HalUartRecv_cb)(uint8_t);
@@ -31,9 +31,9 @@ void HalGpioPinValueSet(uint8_t io, uint8_t val);
 void HalIRQEnableSet(bool enable);
 
 int8_t HalPulseInfoInit(uint8_t index, HalPulseInfo_t *info);
-int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint8_t count, bool enable, motorCountOver_cb cb);
+int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint8_t count, bool enable);
 HalPulseInfo_t * HalPulseInfoGet(uint8_t index);
-void HalPulseStart(uint32_t period);
+void HalPulseStart(uint32_t period, MotorStepOver_cb cb);
 void HalPulseStop(void);
 
 uint8_t HalGetDevAddr(void);
