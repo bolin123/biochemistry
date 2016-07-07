@@ -5,15 +5,15 @@
 
 typedef enum
 {
-	MOTOR_DIR_FORWARD = 0,
-	MOTOR_DIR_BACKWARD,
-}MotorDirection_t;
+    MOTOR_DIR_FORWARD = 0,
+    MOTOR_DIR_BACKWARD,
+} MotorDirection_t;
 
 typedef enum
 {
-	MOTOR_EVENT_STEP_OVER = 0,
-	MOTOR_EVENT_SENSOR_TRIGGERED,
-}MotorEvent_t;
+    MOTOR_EVENT_STEP_OVER = 0,
+    MOTOR_EVENT_SENSOR_TRIGGERED,
+} MotorEvent_t;
 
 typedef void (*MotorStepOver_cb)(uint8_t );
 typedef bool (*MotorSensorTriggered)(void);

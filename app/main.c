@@ -5,7 +5,7 @@ int main(void)
     SysInit();
     while(1)
     {
-		SysPoll();
+        SysPoll();
     }
-	//return 0;
+    //return 0;
 }

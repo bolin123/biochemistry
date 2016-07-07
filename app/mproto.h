@@ -5,21 +5,21 @@
 
 typedef struct
 {
-	uint8_t preamble;
-	uint8_t addr;
-	uint8_t dataLen;
-	uint8_t sn;
-	uint8_t cmd;
-	uint8_t data[];
-}MProtoHead_t;
+    uint8_t preamble;
+    uint8_t addr;
+    uint8_t dataLen;
+    uint8_t sn;
+    uint8_t cmd;
+    uint8_t data[];
+} MProtoHead_t;
 
 typedef struct
 {
-	uint8_t id;
-	uint8_t dir;
-	uint16_t count;
-}MProtoStep_t;
-								 
+    uint8_t id;
+    uint8_t dir;
+    uint16_t count;
+} MProtoStep_t;
+
 #define MPROTO_CMD_BROADCAST 0x00
 #define MPROTO_CMD_SELF_CHECK 0x01
 #define MPROTO_CMD_MOTOR_CTRL 0x02
