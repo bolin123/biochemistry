@@ -1,0 +1,123 @@
+C51 COMPILER V9.00   MOTOR                                                                 06/04/2016 22:18:29 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MOTOR
+OBJECT MODULE PLACED IN .\motor.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\..\app\motor.c COMPACT BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEBU
+                    -G OBJECTEXTEND PRINT(.\motor.lst) OBJECT(.\motor.obj)
+
+line level    source
+
+   1          #include "motor.h"
+   2          #include "Hal.h"
+   3          
+   4          #define MOTOR_NUM 2 //控制电机总数
+   5          
+   6          #define MOTOR1_CONTRL_PIN  0x27     //电机1控制管脚 p27
+   7          #define MOTOR1_DIRECTION_PIN 0x25   //电机1方向管脚 p17
+   8          #define MOTOR2_CONTRL_PIN  0x26     //电机2控制管脚 p26
+   9          #define MOTOR2_DIRECTION_PIN 0x24       //电机2方向管脚 p16
+  10          
+  11          static uint8_t g_motorNum = 0;
+  12          static MotorStopEvent_cb g_stopEvent[MOTOR_NUM] = {0};
+  13          
+  14          void MotorInit(void)
+  15          {
+  16   1              HalPulseInfo_t info;
+  17   1              //MOTOR_INDEX_NUM1
+  18   1              info.enable = false;
+  19   1              info.val = 0;
+  20   1              info.count = 0;
+  21   1              info.cb = NULL;
+  22   1              info.curNum = 0;
+  23   1              info.enablePin = HAL_GPIO_INVALID;
+  24   1              info.ctrlPin = MOTOR1_CONTRL_PIN;
+  25   1              info.dirPin = MOTOR1_DIRECTION_PIN;
+  26   1              HalPulseInfoInit(0, &info);
+  27   1              g_motorNum++;
+  28   1      
+  29   1              info.ctrlPin = MOTOR2_CONTRL_PIN;
+  30   1              info.dirPin = MOTOR2_DIRECTION_PIN;
+  31   1              HalPulseInfoInit(1, &info);
+  32   1              g_motorNum++;
+  33   1              
+  34   1              HalPulseStart(1);// 2ms
+  35   1      }
+  36          
+  37          void MotorStopRegister(uint8_t index, MotorStopEvent_cb cb)
+  38          {
+  39   1              g_stopEvent[index] = cb;
+  40   1      }
+  41          
+  42          void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count, motorCountOver_cb cb)
+  43          {
+  44   1              HalIRQEnableSet(false);
+  45   1              HalPulseInfoSet(index, dir, count, true, cb);
+  46   1              HalIRQEnableSet(true);
+  47   1      }
+  48          
+  49          void MotorStop(uint8_t index)
+  50          {
+  51   1              HalIRQEnableSet(false);
+  52   1              HalPulseInfoSet(index, 0, 0, false, NULL);
+  53   1              HalIRQEnableSet(true);
+  54   1      }
+C51 COMPILER V9.00   MOTOR                                                                 06/04/2016 22:18:29 PAGE 2   
+
+  55          
+  56          void MotorPoll(void)
+  57          {
+  58   1              HalPulseInfo_t *info;
+  59   1              uint8_t i;
+  60   1              
+  61   1              for(i = 0; i < MOTOR_NUM; i++)
+  62   1              {
+  63   2                      if(g_stopEvent[i] != NULL && g_stopEvent[i]())
+  64   2                      {
+  65   3                              info = HalPulseInfoGet(i);
+  66   3                      
+  67   3                              if(info->enable)
+  68   3                              {
+  69   4                                      MotorStop(i);
+  70   4                              }
+  71   3                              
+  72   3                      }
+  73   2              }
+  74   1              #if 0
+                      static bool isStop1 = false;
+                      static bool isStop2 = false;
+                      
+                      if(HalGpioPinValueGet(0x00) == 0)
+                      {
+                      if(!isStop1)
+                      {
+                          isStop1 = true;
+                          MotorStop(0);
+                      }
+                      }
+              
+                      if(HalGpioPinValueGet(0x01))
+                      {
+                              if(!isStop2)
+                              {
+                                      isStop2 = true;
+                                      MotorStop(1);
+                              }
+                      }
+                      #endif
+  96   1      }
+  97          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    277    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =      7      19
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

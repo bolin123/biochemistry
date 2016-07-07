@@ -1,0 +1,155 @@
+C51 COMPILER V9.00   MPROTO                                                                06/04/2016 22:18:29 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MPROTO
+OBJECT MODULE PLACED IN .\mproto.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\..\app\mproto.c COMPACT BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEB
+                    -UG OBJECTEXTEND PRINT(.\mproto.lst) OBJECT(.\mproto.obj)
+
+line level    source
+
+   1          #include <stdio.h>
+   2          #include <string.h>
+   3          #include "mproto.h"
+   4          #include "Sys.h"
+   5          
+   6          #define MPROTO_FRAME_BUFFER_LEN 64
+   7          #define MPROTO_FRAME_PREAMBLE  0xbc
+   8          
+   9          static bool g_frameRecved = false;
+  10          static uint8_t g_frameBuffer[MPROTO_FRAME_BUFFER_LEN] = {0};
+  11          static uint8_t g_frameDataCount = 0;
+  12          static uint8_t g_msgIndex = 0;
+  13          
+  14          static uint8_t checkFrame(const uint8_t *dat, uint8_t len)
+  15          {
+  16   1              uint8_t count = 0;
+  17   1              uint8_t i;
+  18   1              
+  19   1              for(i = 0; i < len; i++)
+  20   1              {
+  21   2                      count += dat[i];
+  22   2              }
+  23   1              return count;
+  24   1      }
+  25          
+  26          static void mprotoSend(uint8_t cmd, const uint8_t *dat, uint8_t len, uint8_t sn, bool needAck)
+  27          {
+  28   1              uint8_t buffer[MPROTO_FRAME_BUFFER_LEN];
+  29   1              MProtoHead_t *proto = (MProtoHead_t *)buffer;
+  30   1      
+  31   1              proto->preamble = MPROTO_FRAME_PREAMBLE;
+  32   1              proto->addr = SysGetDevAddr();
+  33   1              proto->dataLen = len;
+  34   1              proto->sn = sn;
+  35   1              proto->cmd = cmd;
+  36   1              if(needAck)
+  37   1              {
+  38   2                      proto->cmd |= 0x80;
+  39   2              }
+  40   1              memcpy(&buffer[sizeof(MProtoHead_t)], dat, len);
+  41   1              buffer[sizeof(MProtoHead_t) + len] = checkFrame(buffer, sizeof(MProtoHead_t) + len);
+  42   1      
+  43   1              HalUartSend(buffer, sizeof(MProtoHead_t) + len + 1);
+  44   1      }
+  45          
+  46          static void mprotoRecv(uint8_t byte)
+  47          {
+  48   1              static uint8_t frameDataLen = 0;
+  49   1              
+  50   1              if(g_frameDataCount >= MPROTO_FRAME_BUFFER_LEN)
+  51   1              {
+  52   2                      g_frameDataCount = 0;
+  53   2              }
+  54   1              g_frameBuffer[g_frameDataCount++] = byte;
+C51 COMPILER V9.00   MPROTO                                                                06/04/2016 22:18:29 PAGE 2   
+
+  55   1      
+  56   1              switch(g_frameDataCount)
+  57   1              {
+  58   2                      case 1:
+  59   2                              if(byte != MPROTO_FRAME_PREAMBLE)
+  60   2                              {
+  61   3                                      g_frameDataCount = 0;
+  62   3                              }
+  63   2                              break;
+  64   2                      case 2:
+  65   2                              if(byte != SysGetDevAddr())
+  66   2                              {
+  67   3                                      g_frameDataCount = 0;
+  68   3                              }
+  69   2                              break;
+  70   2                      case 3:
+  71   2                              if(byte > (MPROTO_FRAME_BUFFER_LEN - sizeof(MProtoHead_t)))
+  72   2                              {
+  73   3                                      g_frameDataCount = 0;
+  74   3                              }
+  75   2                              else
+  76   2                              {
+  77   3                                      frameDataLen = byte;
+  78   3                              }
+  79   2                              break;
+  80   2                      default:
+  81   2                              if(g_frameDataCount == (sizeof(MProtoHead_t) + frameDataLen + 1))
+  82   2                              {
+  83   3                                      if(byte == checkFrame(g_frameBuffer, sizeof(MProtoHead_t) + frameDataLen))
+  84   3                                      {
+  85   4                                              g_frameRecved = true;
+  86   4                                      }
+  87   3                                      g_frameDataCount = 0;
+  88   3                              }
+  89   2                              break;
+  90   2              }
+  91   1      }
+  92          
+  93          static void mprotoPrase(void)
+  94          {
+  95   1              MProtoHead_t *mproto;
+  96   1              uint8_t cmd;
+  97   1              
+  98   1              if(g_frameRecved)
+  99   1              {
+ 100   2                      mproto = (MProtoHead_t *)g_frameBuffer;
+ 101   2                      
+ 102   2                      if(mproto->cmd & 0x80) //need ack
+ 103   2                      {
+ 104   3                              mprotoSend(MPROTO_CMD_ACK, NULL, 0, mproto->sn, false);
+ 105   3                      }
+ 106   2                      cmd = mproto->cmd & 0x7f;
+ 107   2                      switch(cmd)
+ 108   2                      {
+ 109   3                              case MPROTO_CMD_MOTOR_CTRL:
+ 110   3                                      break;
+ 111   3                              default:
+ 112   3                                      break;
+ 113   3                      }
+ 114   2                      g_frameRecved = false;
+ 115   2              }
+ 116   1      }
+C51 COMPILER V9.00   MPROTO                                                                06/04/2016 22:18:29 PAGE 3   
+
+ 117          
+ 118          void MProtoInit(void)
+ 119          {
+ 120   1              HalUartInit(mprotoRecv);
+ 121   1      }
+ 122          
+ 123          void MProtoPoll(void)
+ 124          {
+ 125   1              mprotoPrase();
+ 126   1      }
+ 127          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    439    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =     68      81
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

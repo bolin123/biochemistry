@@ -1,0 +1,89 @@
+C51 COMPILER V9.00   SYS                                                                   06/04/2016 22:18:29 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE SYS
+OBJECT MODULE PLACED IN .\sys.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\..\sys\sys.c COMPACT BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEBUG 
+                    -OBJECTEXTEND PRINT(.\sys.lst) OBJECT(.\sys.obj)
+
+line level    source
+
+   1          #include "sys.h"
+   2          #include "motor.h"
+   3          #include "mproto.h"
+   4          
+   5          static void testMotorCb(uint8_t index)
+   6          {
+   7   1              static bool isOver = false;
+   8   1              MotorStop(index);
+   9   1              HalGpioPinValueSet(0x13, isOver);
+  10   1              if(!isOver)
+  11   1              {
+  12   2                      MotorStart(1, MOTOR_DIR_BACKWARD, 50, testMotorCb);
+  13   2                      isOver = true;
+  14   2              }
+  15   1      }
+  16          
+  17          static bool testMotor1NeedStop(void)
+  18          {
+  19   1              if(HalGpioPinValueGet(0x00) == 0) //P00
+  20   1              {
+  21   2                      return true;
+  22   2              }
+  23   1              return false;
+  24   1      }
+  25          
+  26          static bool testMotor2NeedStop(void)
+  27          {
+  28   1              if(HalGpioPinValueGet(0x01))  //P01
+  29   1              {
+  30   2                      return true;
+  31   2              }
+  32   1              return false;
+  33   1      }
+  34          
+  35          
+  36          static void testMotorInit(void)
+  37          {
+  38   1              MotorStopRegister(0, testMotor1NeedStop);
+  39   1              MotorStopRegister(1, testMotor2NeedStop);
+  40   1              MotorStart(0, MOTOR_DIR_BACKWARD, 0, NULL);
+  41   1              MotorStart(1, MOTOR_DIR_BACKWARD, 0, NULL);
+  42   1              //MotorStart(1, MOTOR_DIR_BACKWARD, 50, testMotorCb);
+  43   1      }
+  44          
+  45          void SysInit(void)
+  46          {
+  47   1          HalInit();
+  48   1              MProtoInit();
+  49   1              MotorInit();
+  50   1              testMotorInit();
+  51   1      }
+  52          
+  53          void SysPoll(void)
+  54          {
+C51 COMPILER V9.00   SYS                                                                   06/04/2016 22:18:29 PAGE 2   
+
+  55   1              MotorPoll();
+  56   1              MProtoPoll();
+  57   1      }
+  58          
+  59          uint8_t SysGetDevAddr(void)
+  60          {
+  61   1              return HalGetDevAddr();
+  62   1      }
+  63          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    148    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =      1    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

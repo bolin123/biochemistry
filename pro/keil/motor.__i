@@ -1,0 +1,1 @@
+"..\..\app\motor.c" COMPACT BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEBUG OBJECTEXTEND PRINT(.\motor.lst) OBJECT(.\motor.obj)

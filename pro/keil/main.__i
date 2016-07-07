@@ -1,0 +1,1 @@
+"..\..\app\main.c" COMPACT BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEBUG OBJECTEXTEND PRINT(.\main.lst) OBJECT(.\main.obj)

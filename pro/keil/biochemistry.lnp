@@ -1,0 +1,8 @@
+"STARTUP.obj",
+".\Hal.obj",
+".\main.obj",
+".\motor.obj",
+".\mproto.obj",
+".\sys.obj" 
+TO "biochemistry" 
+RAMSIZE(256) 
