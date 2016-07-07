@@ -1,5 +1,2 @@
----- MotorStopEventRegister Matches (4 in 3 files) ----
-Motor.c (app):void MotorStopEventRegister(uint8_t index, MotorStopEvent_cb cb)
-Motor.h (app):void MotorStopEventRegister(uint8_t index, MotorStopEvent_cb cb);
-Sys.c (sys):	MotorStopEventRegister(0, testMotor1NeedStop);
-Sys.c (sys):	MotorStopEventRegister(1, testMotor2NeedStop);
+---- motorCtrl_t Matches (1 in 1 files) ----
+Mproto.h (app):}motorCtrl_t;
