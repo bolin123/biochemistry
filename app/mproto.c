@@ -3,7 +3,6 @@
 #include "mproto.h"
 #include "Sys.h"
 
-#define MAX_STEPS_COUNT 10
 #define MPROTO_FRAME_BUFFER_LEN 64
 #define MPROTO_FRAME_PREAMBLE  0xbc
 #define MPROTO_DEFAULT_HOST_ADDR 0xfe
@@ -14,9 +13,9 @@ static uint8_t g_frameDataCount = 0;
 static uint8_t g_msgIndex = 0;
 static uint32_t	g_broadcastTime = 0;
 static bool g_broadcastFlag = false;
-static SysEvent_cb g_eventCb = NULL;
+static SysEvent_cb g_sysEventCb = NULL;
 static uint8_t g_controlIndex = 0;
-static MProtoStep_t g_steps[MAX_STEPS_COUNT];
+static MProtoStepInfo_t g_steps;
 
 static uint8_t checkFrame(const uint8_t *dat, uint8_t len)
 {
@@ -50,41 +49,41 @@ void MprotoSend(uint8_t cmd, const uint8_t *dat, uint8_t len, uint8_t sn, bool n
     HalUartSend(buffer, sizeof(MProtoHead_t) + len + 1);
 }
 
-static void controlOpt(const uint8_t *contents)
+void MProtoCtrlResult(uint8_t result)
+{
+    uint8_t dat[2];
+    dat[0] = g_controlIndex;
+    dat[1] = result;
+    MprotoSend(MPROTO_CMD_MOTOR_CTRL, dat, 2, g_msgIndex++, 0);
+}
+
+static void controlOpt(uint8_t *contents)
 {
     uint8_t i = 0, j, n;
     uint8_t *steps = NULL;
-    uint8_t stepCount = 0, type, replay;
+    uint8_t type, replay;
 
     g_controlIndex = contents[i++];
-    stepCount = contents[i++];
+    g_steps.count = contents[i++];
     type = contents[i++];
     replay = contents[i++];
     steps = &contents[i];
-    if(stepCount <= MAX_STEPS_COUNT)
+    if(g_steps.count <= MPROTO_MAX_STEPS_COUNT)
     {
-        for(n = 0, j = 0; n < stepCount; n++)
+        for(n = 0, j = 0; n < g_steps.count; n++)
         {
-            g_steps[n].id = steps[j++];
-            g_steps[n].dir = steps[j++];
-            g_steps[n].count = steps[j++];
-            g_steps[n].count = (g_steps[n].count << 8) + steps[j++];
+            g_steps.step[n].id = steps[j++];
+            g_steps.step[n].dir = steps[j++];
+            g_steps.step[n].count = steps[j++];
+            g_steps.step[n].count = (g_steps.step[n].count << 8) + steps[j++];
         }
-        g_eventCb(SYS_EVENT_MOTOR_CONTRL, g_steps, stepCount);
+        g_sysEventCb(SYS_EVENT_MOTOR_CONTRL, (void *)&g_steps);
     }
     else
     {
         MProtoCtrlResult(1);
     }
 
-}
-
-void MProtoCtrlResult(uint8_t result)
-{
-    uint8_t data[2];
-    data[0] = g_controlIndex;
-    data[1] = result;
-    MprotoSend(MPROTO_CMD_MOTOR_CTRL, data, 2, g_msgIndex++, 0);
 }
 
 static void mprotoRecv(uint8_t byte)
@@ -138,6 +137,7 @@ static void mprotoPrase(void)
 {
     MProtoHead_t *mproto;
     uint8_t cmd;
+    uint8_t *content = NULL;
 
     if(g_frameRecved)
     {
@@ -155,10 +155,11 @@ static void mprotoPrase(void)
             g_broadcastFlag = true;
             break;
         case MPROTO_CMD_SELF_CHECK:
-            g_eventCb(SYS_EVENT_SELFCHECK, NULL, 0);
+            g_sysEventCb(SYS_EVENT_SELFCHECK, NULL);
             break;
         case MPROTO_CMD_MOTOR_CTRL:
-            controlOpt(mproto->data);
+            content = (uint8_t *)mproto + 1;
+            controlOpt(content);
             break;
         case MPROTO_CMD_QUERY:
             break;
@@ -182,7 +183,7 @@ static void broadcastAck(void)
 
 void MProtoInit(SysEvent_cb cb)
 {
-    g_eventCb = cb;
+    g_sysEventCb = cb;
     HalUartInit(mprotoRecv);
 }
 

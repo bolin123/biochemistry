@@ -20,7 +20,7 @@ typedef bool (*MotorSensorTriggered)(void);
 typedef void (*MotorEventHandle)(uint8_t, MotorEvent_t);
 
 void MotorInit(MotorEventHandle cb);
-void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count, MotorStepOver_cb cb);
+void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count);
 void MotorStop(uint8_t index);
 void MotorPoll(void);
 void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb);

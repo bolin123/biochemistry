@@ -4,6 +4,191 @@
 <h1>礦ision Build Log</h1>
 <h2>Project:</h2>
 C:\工作相关\全自动生化仪\software\biochemistry\pro\keil\biochemistry.uvproj
-Project File Date:  06/04/2016
+Project File Date:  07/10/2016
 
 <h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling Hal.c...
+compiling main.c...
+compiling motor.c...
+..\..\APP\MOTOR.C(29): error C204: 'cb': undefined member
+..\..\APP\MOTOR.C(51): error C236: '_MotorStart': different length of parameter lists
+..\..\APP\MOTOR.C(71): error C211: call not to a function
+compiling mproto.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(29): error C141: syntax error near 'cb', expected ')'
+..\..\APP\MPROTO.C(36): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(36): error C141: syntax error near '='
+..\..\APP\MPROTO.C(36): error C141: syntax error near ')'
+..\..\APP\MPROTO.C(38): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(39): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(40): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(41): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(42): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(45): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+Target not created
+Build target 'Target 1'
+compiling Hal.c...
+compiling main.c...
+compiling motor.c...
+..\..\APP\MOTOR.C(65): warning C280: 'info': unreferenced local variable
+compiling mproto.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(29): error C141: syntax error near 'cb', expected ')'
+..\..\APP\MPROTO.C(36): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(36): error C141: syntax error near '='
+..\..\APP\MPROTO.C(36): error C141: syntax error near ')'
+..\..\APP\MPROTO.C(38): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(39): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(40): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(41): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(42): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(45): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+Target not created
+Build target 'Target 1'
+compiling motor.c...
+compiling mproto.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(29): error C141: syntax error near 'cb', expected ')'
+..\..\APP\MPROTO.C(36): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(36): error C141: syntax error near '='
+..\..\APP\MPROTO.C(36): error C141: syntax error near ')'
+..\..\APP\MPROTO.C(38): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(39): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(40): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(41): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(42): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(45): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(29): error C141: syntax error near 'cb', expected ')'
+..\..\APP\MPROTO.C(36): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(36): error C141: syntax error near '='
+..\..\APP\MPROTO.C(36): error C141: syntax error near ')'
+..\..\APP\MPROTO.C(38): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(39): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(40): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(41): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(42): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(45): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(29): error C141: syntax error near 'cb', expected ')'
+..\..\APP\MPROTO.C(36): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(36): error C141: syntax error near '='
+..\..\APP\MPROTO.C(36): error C141: syntax error near ')'
+..\..\APP\MPROTO.C(38): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(39): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(40): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(41): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(42): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(45): error C202: 'proto': undefined identifier
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+..\..\APP\MPROTO.H(13): error C141: syntax error near '['
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+..\..\APP\MPROTO.H(29): error C141: syntax error near 'cb', expected ')'
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\SYS\SYS.C(57): warning C206: 'MProtoCtrlResult': missing function-prototype
+..\..\SYS\SYS.C(57): error C267: 'MProtoCtrlResult': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+compiling main.c...
+compiling mproto.c...
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\SYS\SYS.C(57): warning C206: 'MProtoCtrlResult': missing function-prototype
+..\..\SYS\SYS.C(57): error C267: 'MProtoCtrlResult': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+..\..\APP\MPROTO.C(73): error C212: indirect call: parameters do not fit within registers
+compiling sys.c...
+..\..\SYS\SYS.C(57): warning C206: 'MProtoCtrlResult': missing function-prototype
+..\..\SYS\SYS.C(57): error C267: 'MProtoCtrlResult': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+compiling main.c...
+compiling mproto.c...
+..\..\APP\MPROTO.C(76): warning C206: 'MProtoCtrlResult': missing function-prototype
+..\..\APP\MPROTO.C(76): error C267: 'MProtoCtrlResult': requires ANSI-style prototype
+..\..\APP\MPROTO.C(82): error C231: 'MProtoCtrlResult': redefinition
+..\..\APP\MPROTO.C(83): error C141: syntax error near '['
+..\..\APP\MPROTO.C(83): error C141: syntax error near ']'
+..\..\APP\MPROTO.C(84): error C141: syntax error near 'data'
+..\..\APP\MPROTO.C(84): error C141: syntax error near ']'
+..\..\APP\MPROTO.C(85): error C141: syntax error near 'data'
+..\..\APP\MPROTO.C(85): error C141: syntax error near ']'
+..\..\APP\MPROTO.C(86): error C141: syntax error near 'data'
+compiling sys.c...
+..\..\SYS\SYS.C(57): warning C206: 'MProtoCtrlResult': missing function-prototype
+..\..\SYS\SYS.C(57): error C267: 'MProtoCtrlResult': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+..\..\APP\MPROTO.C(54): error C141: syntax error near '['
+..\..\APP\MPROTO.C(54): error C141: syntax error near ']'
+..\..\APP\MPROTO.C(55): error C141: syntax error near 'data'
+..\..\APP\MPROTO.C(55): error C141: syntax error near ']'
+..\..\APP\MPROTO.C(56): error C141: syntax error near 'data'
+..\..\APP\MPROTO.C(56): error C141: syntax error near ']'
+..\..\APP\MPROTO.C(57): error C141: syntax error near 'data'
+compiling sys.c...
+..\..\SYS\SYS.C(91): warning C209: '_MotorInit': too few actual parameters
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+..\..\APP\MPROTO.C(160): error C141: syntax error near 'data', expected '<id>'
+Target not created
+Build target 'Target 1'
+compiling mproto.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HALPULSEINFOGET?HAL
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?HALPULSESTOP?HAL
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SYSMOTOREVENTHANDLE?SYS
+Program Size: data=9.0 xdata=250 code=3879
+creating hex file from "biochemistry"...
+"biochemistry" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling sys.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HALPULSEINFOGET?HAL
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?HALPULSESTOP?HAL
+Program Size: data=9.0 xdata=249 code=3885
+creating hex file from "biochemistry"...
+"biochemistry" - 0 Error(s), 2 Warning(s).

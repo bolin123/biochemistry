@@ -66,15 +66,17 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
     }
 }
 
-static void sysEventHandle(uint8_t event, void *args, uint8_t arglen)
+static void sysEventHandle(uint8_t event, void *args)
 {
+    MProtoStepInfo_t *stepInfo = NULL;
     switch(event)
     {
     case SYS_EVENT_SELFCHECK:
         break;
     case SYS_EVENT_MOTOR_CONTRL:
-        g_curStepInfo = (MProtoStep_t *)args;
-        g_stepCount = arglen - 1;
+        stepInfo = (MProtoStepInfo_t *)args;
+        g_curStepInfo = stepInfo->step;
+        g_stepCount = stepInfo->count - 1;
         MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->count);
         break;
     default:
@@ -86,7 +88,7 @@ void SysInit(void)
 {
     HalInit();
     MProtoInit(sysEventHandle);
-    MotorInit();
+    MotorInit(sysMotorEventHandle);
     sysMotorInit();
 }
 

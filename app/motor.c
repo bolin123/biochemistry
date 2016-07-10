@@ -26,7 +26,6 @@ void MotorInit(MotorEventHandle cb)
     info.enable = false;
     info.val = 0;
     info.count = 0;
-    info.cb = NULL;
     info.curNum = 0;
     info.enablePin = HAL_GPIO_INVALID;
     info.ctrlPin = MOTOR1_CONTRL_PIN;
@@ -63,7 +62,6 @@ void MotorStop(uint8_t index)
 
 void MotorPoll(void)
 {
-    HalPulseInfo_t *info;
     uint8_t i;
 
     for(i = 0; i < MOTOR_NUM; i++)
