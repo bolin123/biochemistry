@@ -28,6 +28,13 @@ typedef struct
     MProtoStep_t step[MPROTO_MAX_STEPS_COUNT];
 }MProtoStepInfo_t;
 
+typedef enum
+{
+    MPROTO_RESULT_SUCCESS = 0,
+    MPROTO_RESULT_CMD_VALID,
+    MPROTO_RESULT_BUSY,
+}MProtoResult_t;
+
 #define MPROTO_CMD_BROADCAST 0x00
 #define MPROTO_CMD_SELF_CHECK 0x01
 #define MPROTO_CMD_MOTOR_CTRL 0x02

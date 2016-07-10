@@ -4,6 +4,7 @@
 
 static MProtoStep_t *g_curStepInfo = NULL;
 static uint8_t g_stepCount = 0;
+static bool g_sysStatus = SYS_STATUS_IDLE;
 
 static bool sysMotor1SensorTriggered(void)
 {
@@ -43,7 +44,7 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
     }
     else if(MOTOR_EVENT_SENSOR_TRIGGERED == event)
     {
-        if(g_curStepInfo->count == 0)
+        if(g_curStepInfo != NULL && g_curStepInfo->count == 0)
         {
             doNextStep = true;
         }
@@ -54,7 +55,8 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
         MotorStop(id);
         if(g_stepCount == 0)
         {
-            MProtoCtrlResult(0);
+            g_sysStatus = SYS_STATUS_IDLE;
+            MProtoCtrlResult(MPROTO_RESULT_SUCCESS);
             g_curStepInfo = NULL;
         }
         else
@@ -77,6 +79,7 @@ static void sysEventHandle(uint8_t event, void *args)
         stepInfo = (MProtoStepInfo_t *)args;
         g_curStepInfo = stepInfo->step;
         g_stepCount = stepInfo->count - 1;
+        g_sysStatus = SYS_STATUS_BUSY;
         MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->count);
         break;
     default:
@@ -96,6 +99,11 @@ void SysPoll(void)
 {
     MotorPoll();
     MProtoPoll();
+}
+
+SysStatus_t SysGetStatus(void)
+{
+    return g_sysStatus;
 }
 
 uint8_t SysGetDevAddr(void)

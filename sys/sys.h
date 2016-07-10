@@ -3,6 +3,12 @@
 #include "Hal.h"
 #include "ctypes.h"
 
+typedef enum
+{
+    SYS_STATUS_IDLE = 0,
+    SYS_STATUS_BUSY,
+}SysStatus_t;
+
 #define SysTime() HalSysTime()
 #define SysHasPassTime(oldTime, pass) (SysTime() - oldTime > pass)
 
@@ -14,6 +20,7 @@ typedef void (*SysEvent_cb)(uint8_t event, void *args);
 void SysInit(void);
 void SysPoll(void);
 uint8_t SysGetDevAddr(void);
+SysStatus_t SysGetStatus(void);
 
 #endif
 

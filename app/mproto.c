@@ -49,7 +49,7 @@ void MprotoSend(uint8_t cmd, const uint8_t *dat, uint8_t len, uint8_t sn, bool n
     HalUartSend(buffer, sizeof(MProtoHead_t) + len + 1);
 }
 
-void MProtoCtrlResult(uint8_t result)
+void MProtoCtrlResult(MProtoResult_t result)
 {
     uint8_t dat[2];
     dat[0] = g_controlIndex;
@@ -81,7 +81,7 @@ static void controlOpt(uint8_t *contents)
     }
     else
     {
-        MProtoCtrlResult(1);
+        MProtoCtrlResult(MPROTO_RESULT_CMD_VALID);
     }
 
 }
@@ -158,8 +158,15 @@ static void mprotoPrase(void)
             g_sysEventCb(SYS_EVENT_SELFCHECK, NULL);
             break;
         case MPROTO_CMD_MOTOR_CTRL:
-            content = (uint8_t *)mproto + 1;
-            controlOpt(content);
+            content = (uint8_t *)mproto + sizeof(MProtoHead_t);
+            if(SysGetStatus() == SYS_STATUS_IDLE)
+            {
+                controlOpt(content);
+            }
+            else
+            {
+                MProtoCtrlResult(MPROTO_RESULT_BUSY);
+            }
             break;
         case MPROTO_CMD_QUERY:
             break;

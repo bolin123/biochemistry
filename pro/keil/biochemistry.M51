@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        07/10/2016  15:50:44  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/10/2016  22:45:19  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -47,8 +47,8 @@ LINK MAP OF MODULE:  biochemistry (?C_STARTUP)
             XDATA   0000H     001AH     INPAGE       ?PD?HAL
             XDATA   001AH     000AH     INPAGE       ?PD?MOTOR
             XDATA   0024H     0074H     INPAGE       ?PD?MPROTO
-            XDATA   0098H     0004H     INPAGE       ?PD?SYS
-            XDATA   009CH     005DH     INPAGE       _PDATA_GROUP_
+            XDATA   0098H     0005H     INPAGE       ?PD?SYS
+            XDATA   009DH     005DH     INPAGE       _PDATA_GROUP_
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -59,51 +59,52 @@ LINK MAP OF MODULE:  biochemistry (?C_STARTUP)
             CODE    001EH     0005H     UNIT         ?PR?HALPULSESTOP?HAL
             CODE    0023H     0003H     ABSOLUTE     
             CODE    0026H     0366H     UNIT         ?C?LIB_CODE
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 2
 
 
             CODE    038CH     012CH     UNIT         ?PR?_CONTROLOPT?MPROTO
             CODE    04B8H     00ECH     UNIT         ?PR?TIME1_INT?HAL
             CODE    05A4H     00DBH     UNIT         ?PR?_HALGPIOPINVALUESET?HAL
-            CODE    067FH     00B5H     UNIT         ?PR?MPROTOPRASE?MPROTO
-            CODE    0734H     008EH     UNIT         ?PR?_HALPULSEINFOSET?HAL
-            CODE    07C2H     008CH     UNIT         ?C_C51STARTUP
-            CODE    084EH     0085H     UNIT         ?C_INITSEG
-            CODE    08D3H     0085H     UNIT         ?PR?_MPROTOSEND?MPROTO
-            CODE    0958H     007FH     UNIT         ?PR?_MPROTORECV?MPROTO
-            CODE    09D7H     0075H     UNIT         ?PR?_HALPULSESTART?HAL
-            CODE    0A4CH     0070H     UNIT         ?PR?_SYSEVENTHANDLE?SYS
-            CODE    0ABCH     006DH     UNIT         ?PR?_HALGPIOPINVALUEGET?HAL
-            CODE    0B29H     0069H     UNIT         ?PR?_SYSMOTOREVENTHANDLE?SYS
-            CODE    0B92H     005AH     UNIT         ?PR?UARTIRQ?HAL
-            CODE    0BECH     005AH     UNIT         ?PR?_MOTORINIT?MOTOR
-            CODE    0C46H     0059H     UNIT         ?PR?BROADCASTACK?MPROTO
-            CODE    0C9FH     0050H     UNIT         ?PR?MOTORPOLL?MOTOR
-            CODE    0CEFH     0044H     UNIT         ?C?LDIV
-            CODE    0D33H     0030H     UNIT         ?PR?_HALUARTSEND?HAL
-            CODE    0D63H     0030H     UNIT         ?PR?_CHECKFRAME?MPROTO
-            CODE    0D93H     0027H     UNIT         ?PR?_HALUARTINIT?HAL
-            CODE    0DBAH     0026H     UNIT         ?PR?_MOTORSTART?MOTOR
-            CODE    0DE0H     0026H     UNIT         ?PR?_MPROTOCTRLRESULT?MPROTO
-            CODE    0E06H     0024H     UNIT         ?PR?_HALPULSEINFOINIT?HAL
-            CODE    0E2AH     0021H     UNIT         ?PR?TIME0_INT?HAL
-            CODE    0E4BH     001BH     UNIT         ?PR?_MOTORSTOP?MOTOR
-            CODE    0E66H     0018H     UNIT         ?PR?SYSINIT?SYS
-            CODE    0E7EH     0016H     UNIT         ?PR?SYSMOTORINIT?SYS
-            CODE    0E94H     0013H     UNIT         ?PR?_MPROTOINIT?MPROTO
-            CODE    0EA7H     0011H     UNIT         ?PR?_MOTORTRIGGEREDREGISTER?MOTOR
-            CODE    0EB8H     0010H     UNIT         ?PR?_MOTORSTEPOVERHANDLE?MOTOR
-            CODE    0EC8H     000FH     UNIT         ?PR?HALINIT?HAL
-            CODE    0ED7H     000EH     UNIT         ?PR?_TIMERMODECONFIG?HAL
-            CODE    0EE5H     000EH     UNIT         ?PR?SYSMOTOR1SENSORTRIGGERED?SYS
-            CODE    0EF3H     000EH     UNIT         ?PR?SYSMOTOR2SENSORTRIGGERED?SYS
-            CODE    0F01H     000BH     UNIT         ?PR?SYSTIMERINIT?HAL
-            CODE    0F0CH     0008H     UNIT         ?PR?MAIN?MAIN
-            CODE    0F14H     0006H     UNIT         ?PR?_HALIRQENABLESET?HAL
-            CODE    0F1AH     0006H     UNIT         ?PR?MPROTOPOLL?MPROTO
-            CODE    0F20H     0006H     UNIT         ?PR?SYSPOLL?SYS
-            CODE    0F26H     0004H     UNIT         ?PR?SYSGETDEVADDR?SYS
-            CODE    0F2AH     0003H     UNIT         ?PR?HALGETDEVADDR?HAL
+            CODE    067FH     00CCH     UNIT         ?PR?MPROTOPRASE?MPROTO
+            CODE    074BH     008EH     UNIT         ?PR?_HALPULSEINFOSET?HAL
+            CODE    07D9H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0865H     0088H     UNIT         ?C_INITSEG
+            CODE    08EDH     0085H     UNIT         ?PR?_MPROTOSEND?MPROTO
+            CODE    0972H     007FH     UNIT         ?PR?_MPROTORECV?MPROTO
+            CODE    09F1H     0079H     UNIT         ?PR?_SYSMOTOREVENTHANDLE?SYS
+            CODE    0A6AH     0075H     UNIT         ?PR?_HALPULSESTART?HAL
+            CODE    0ADFH     0074H     UNIT         ?PR?_SYSEVENTHANDLE?SYS
+            CODE    0B53H     006DH     UNIT         ?PR?_HALGPIOPINVALUEGET?HAL
+            CODE    0BC0H     005AH     UNIT         ?PR?UARTIRQ?HAL
+            CODE    0C1AH     005AH     UNIT         ?PR?_MOTORINIT?MOTOR
+            CODE    0C74H     0059H     UNIT         ?PR?BROADCASTACK?MPROTO
+            CODE    0CCDH     0050H     UNIT         ?PR?MOTORPOLL?MOTOR
+            CODE    0D1DH     0044H     UNIT         ?C?LDIV
+            CODE    0D61H     0030H     UNIT         ?PR?_HALUARTSEND?HAL
+            CODE    0D91H     0030H     UNIT         ?PR?_CHECKFRAME?MPROTO
+            CODE    0DC1H     0027H     UNIT         ?PR?_HALUARTINIT?HAL
+            CODE    0DE8H     0026H     UNIT         ?PR?_MOTORSTART?MOTOR
+            CODE    0E0EH     0026H     UNIT         ?PR?_MPROTOCTRLRESULT?MPROTO
+            CODE    0E34H     0024H     UNIT         ?PR?_HALPULSEINFOINIT?HAL
+            CODE    0E58H     0021H     UNIT         ?PR?TIME0_INT?HAL
+            CODE    0E79H     001BH     UNIT         ?PR?_MOTORSTOP?MOTOR
+            CODE    0E94H     0018H     UNIT         ?PR?SYSINIT?SYS
+            CODE    0EACH     0016H     UNIT         ?PR?SYSMOTORINIT?SYS
+            CODE    0EC2H     0013H     UNIT         ?PR?_MPROTOINIT?MPROTO
+            CODE    0ED5H     0011H     UNIT         ?PR?_MOTORTRIGGEREDREGISTER?MOTOR
+            CODE    0EE6H     0010H     UNIT         ?PR?_MOTORSTEPOVERHANDLE?MOTOR
+            CODE    0EF6H     000FH     UNIT         ?PR?HALINIT?HAL
+            CODE    0F05H     000EH     UNIT         ?PR?_TIMERMODECONFIG?HAL
+            CODE    0F13H     000EH     UNIT         ?PR?SYSMOTOR1SENSORTRIGGERED?SYS
+            CODE    0F21H     000EH     UNIT         ?PR?SYSMOTOR2SENSORTRIGGERED?SYS
+            CODE    0F2FH     000BH     UNIT         ?PR?SYSTIMERINIT?HAL
+            CODE    0F3AH     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    0F42H     0006H     UNIT         ?PR?_HALIRQENABLESET?HAL
+            CODE    0F48H     0006H     UNIT         ?PR?MPROTOPOLL?MPROTO
+            CODE    0F4EH     0006H     UNIT         ?PR?SYSPOLL?SYS
+            CODE    0F54H     0005H     UNIT         ?PR?SYSGETSTATUS?SYS
+            CODE    0F59H     0004H     UNIT         ?PR?SYSGETDEVADDR?SYS
+            CODE    0F5DH     0003H     UNIT         ?PR?HALGETDEVADDR?HAL
 
 
 
@@ -118,10 +119,10 @@ SEGMENT                                     PDATA_GROUP
   +--> ?C_INITSEG
 
 ?PR?MAIN?MAIN                             -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 3
+
+
   +--> ?PR?SYSINIT?SYS
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 3
-
-
   +--> ?PR?SYSPOLL?SYS
 
 ?PR?SYSINIT?SYS                           -----    -----
@@ -137,28 +138,28 @@ SEGMENT                                     PDATA_GROUP
   +--> ?PR?SYSTIMERINIT?HAL
   +--> ?PR?_HALIRQENABLESET?HAL
 
-?PR?_SYSEVENTHANDLE?SYS                   009CH    0006H
+?PR?_SYSEVENTHANDLE?SYS                   009DH    0006H
   +--> ?PR?_MOTORSTART?MOTOR
 
-?PR?_MOTORSTART?MOTOR                     00A2H    0003H
+?PR?_MOTORSTART?MOTOR                     00A3H    0003H
   +--> ?PR?_HALIRQENABLESET?HAL
   +--> ?PR?_HALPULSEINFOSET?HAL
 
-?PR?_HALPULSEINFOSET?HAL                  00A5H    0004H
+?PR?_HALPULSEINFOSET?HAL                  00A6H    0004H
   +--> ?PR?_HALGPIOPINVALUESET?HAL
 
 ?PR?_MPROTOINIT?MPROTO                    -----    -----
   +--> ?PR?_MPROTORECV?MPROTO
   +--> ?PR?_HALUARTINIT?HAL
 
-?PR?_MPROTORECV?MPROTO                    009CH    0001H
+?PR?_MPROTORECV?MPROTO                    009DH    0001H
   +--> ?PR?SYSGETDEVADDR?SYS
   +--> ?PR?_CHECKFRAME?MPROTO
 
 ?PR?SYSGETDEVADDR?SYS                     -----    -----
   +--> ?PR?HALGETDEVADDR?HAL
 
-?PR?_CHECKFRAME?MPROTO                    00F5H    0003H
+?PR?_CHECKFRAME?MPROTO                    00F6H    0003H
 
 ?PR?_HALUARTINIT?HAL                      -----    -----
   +--> ?PR?_HALIRQENABLESET?HAL
@@ -168,28 +169,28 @@ SEGMENT                                     PDATA_GROUP
   +--> ?PR?_MPROTOCTRLRESULT?MPROTO
   +--> ?PR?_MOTORSTART?MOTOR
 
-?PR?_MOTORSTOP?MOTOR                      009CH    0001H
+?PR?_MOTORSTOP?MOTOR                      009DH    0001H
   +--> ?PR?_HALIRQENABLESET?HAL
   +--> ?PR?_HALPULSEINFOSET?HAL
 
-?PR?_MPROTOCTRLRESULT?MPROTO              00ACH    0002H
+?PR?_MPROTOCTRLRESULT?MPROTO              00ADH    0002H
   +--> ?PR?_MPROTOSEND?MPROTO
 
-?PR?_MPROTOSEND?MPROTO                    00AEH    0047H
+?PR?_MPROTOSEND?MPROTO                    00AFH    0047H
   +--> ?PR?_CHECKFRAME?MPROTO
   +--> ?PR?_HALUARTSEND?HAL
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 4
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 4
 
 
-?PR?_HALUARTSEND?HAL                      00F5H    0003H
+?PR?_HALUARTSEND?HAL                      00F6H    0003H
 
-?PR?_MOTORINIT?MOTOR                      009CH    0008H
+?PR?_MOTORINIT?MOTOR                      009DH    0008H
   +--> ?PR?_HALPULSEINFOINIT?HAL
   +--> ?PR?_MOTORSTEPOVERHANDLE?MOTOR
   +--> ?PR?_HALPULSESTART?HAL
 
-?PR?_HALPULSESTART?HAL                    00A4H    0005H
+?PR?_HALPULSESTART?HAL                    00A5H    0005H
 
 ?PR?SYSMOTORINIT?SYS                      -----    -----
   +--> ?PR?SYSMOTOR1SENSORTRIGGERED?SYS
@@ -206,28 +207,30 @@ SEGMENT                                     PDATA_GROUP
   +--> ?PR?MOTORPOLL?MOTOR
   +--> ?PR?MPROTOPOLL?MPROTO
 
-?PR?MOTORPOLL?MOTOR                       009CH    0001H
+?PR?MOTORPOLL?MOTOR                       009DH    0001H
 
 ?PR?MPROTOPOLL?MPROTO                     -----    -----
   +--> ?PR?MPROTOPRASE?MPROTO
   +--> ?PR?BROADCASTACK?MPROTO
 
-?PR?MPROTOPRASE?MPROTO                    009CH    0006H
+?PR?MPROTOPRASE?MPROTO                    009DH    0006H
   +--> ?PR?_MPROTOSEND?MPROTO
   +--> ?PR?HALSYSTIME?HAL
+  +--> ?PR?SYSGETSTATUS?SYS
   +--> ?PR?_CONTROLOPT?MPROTO
-
-?PR?_CONTROLOPT?MPROTO                    00A2H    000AH
   +--> ?PR?_MPROTOCTRLRESULT?MPROTO
 
-?PR?BROADCASTACK?MPROTO                   009CH    0001H
+?PR?_CONTROLOPT?MPROTO                    00A3H    000AH
+  +--> ?PR?_MPROTOCTRLRESULT?MPROTO
+
+?PR?BROADCASTACK?MPROTO                   009DH    0001H
   +--> ?PR?HALSYSTIME?HAL
   +--> ?PR?SYSGETDEVADDR?SYS
   +--> ?PR?_MPROTOSEND?MPROTO
 
 *** NEW ROOT ***************************************************
 
-?PR?TIME1_INT?HAL                         00F8H    0001H
+?PR?TIME1_INT?HAL                         00F9H    0001H
   +--> ?PR?_HALGPIOPINVALUESET?HAL
 
 
@@ -236,12 +239,12 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
 
   VALUE           TYPE          NAME
   ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 5
+
+
 
   -------         MODULE        ?C_STARTUP
-  C:07C2H         SEGMENT       ?C_C51STARTUP
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 5
-
-
+  C:07D9H         SEGMENT       ?C_C51STARTUP
   I:0008H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
@@ -251,7 +254,7 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:07C5H         SYMBOL        IDATALOOP
+  C:07DCH         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -260,18 +263,18 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:07C2H         SYMBOL        STARTUP1
+  C:07D9H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:07C2H         LINE#         133
-  C:07C4H         LINE#         134
-  C:07C5H         LINE#         135
-  C:07C6H         LINE#         136
-  C:07C8H         LINE#         185
-  C:07CBH         LINE#         196
+  C:07D9H         LINE#         133
+  C:07DBH         LINE#         134
+  C:07DCH         LINE#         135
+  C:07DDH         LINE#         136
+  C:07DFH         LINE#         185
+  C:07E2H         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        HAL
@@ -284,7 +287,7 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   D:00B0H         PUBLIC        P3
   D:00E8H         PUBLIC        P4
   B:00A8H.7       PUBLIC        EA
-  C:0ED7H         SYMBOL        _timerModeConfig
+  C:0F05H         SYMBOL        _timerModeConfig
   D:00A8H         PUBLIC        IE
   B:00A8H.4       PUBLIC        ES
   D:00B8H         PUBLIC        IP
@@ -292,25 +295,25 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   B:0098H.1       PUBLIC        TI
   D:00CBH         PUBLIC        RCAP2H
   D:00CAH         PUBLIC        RCAP2L
-  C:0EC8H         PUBLIC        HalInit
+  C:0EF6H         PUBLIC        HalInit
   D:0099H         PUBLIC        SBUF
   D:0098H         PUBLIC        SCON
-  C:09D7H         PUBLIC        _HalPulseStart
+  C:0A6AH         PUBLIC        _HalPulseStart
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 6
+
+
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
   X:0002H         SYMBOL        g_uartRecvCb
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 6
-
-
-  C:0D33H         PUBLIC        _HalUartSend
-  C:0E06H         PUBLIC        _HalPulseInfoInit
+  C:0D61H         PUBLIC        _HalUartSend
+  C:0E34H         PUBLIC        _HalPulseInfoInit
   B:00A8H.1       PUBLIC        ET0
   B:00A8H.3       PUBLIC        ET1
   C:001EH         PUBLIC        HalPulseStop
-  C:0D93H         PUBLIC        _HalUartInit
+  C:0DC1H         PUBLIC        _HalUartInit
   D:008CH         PUBLIC        TH0
   D:008DH         PUBLIC        TH1
-  C:0E2AH         PUBLIC        Time0_Int
+  C:0E58H         PUBLIC        Time0_Int
   X:0005H         PUBLIC        g_pulseConfig
   D:00CDH         PUBLIC        TH2
   C:04B8H         PUBLIC        Time1_Int
@@ -319,18 +322,18 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   D:00CCH         PUBLIC        TL2
   C:000EH         PUBLIC        _HalPulseInfoGet
   B:0088H.4       PUBLIC        TR0
-  C:0F2AH         PUBLIC        HalGetDevAddr
+  C:0F5DH         PUBLIC        HalGetDevAddr
   B:0088H.6       PUBLIC        TR1
   X:0015H         SYMBOL        g_pluseStepOverCb
-  C:0734H         PUBLIC        _HalPulseInfoSet
+  C:074BH         PUBLIC        _HalPulseInfoSet
   D:00C8H         PUBLIC        T2CON
   C:0003H         PUBLIC        HalSysTime
-  C:0B92H         PUBLIC        uartIrq
-  C:0ABCH         PUBLIC        _HalGpioPinValueGet
+  C:0BC0H         PUBLIC        uartIrq
+  C:0B53H         PUBLIC        _HalGpioPinValueGet
   X:0018H         SYMBOL        g_timerCount
   D:00D0H         PUBLIC        PSW
-  C:0F01H         SYMBOL        sysTimerInit
-  C:0F14H         PUBLIC        _HalIRQEnableSet
+  C:0F2FH         SYMBOL        sysTimerInit
+  C:0F42H         PUBLIC        _HalIRQEnableSet
   -------         PROC          _HALGPIOPINVALUESET
   D:0007H         SYMBOL        io
   D:0005H         SYMBOL        val
@@ -356,12 +359,12 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   C:05E8H         LINE#         28
   C:05E8H         LINE#         29
   C:05EAH         LINE#         30
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 7
+
+
   C:05EBH         LINE#         31
   C:05EBH         LINE#         32
   C:05EDH         LINE#         33
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 7
-
-
   C:05F0H         LINE#         34
   C:05F0H         LINE#         35
   C:05FDH         LINE#         36
@@ -415,35 +418,35 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   D:0005H         SYMBOL        port
   D:0007H         SYMBOL        pin
   -------         ENDDO         
-  C:0ABCH         LINE#         84
-  C:0ABCH         LINE#         85
-  C:0ABCH         LINE#         87
-  C:0AC3H         LINE#         88
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 8
+  C:0B53H         LINE#         84
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 8
 
 
-  C:0AC7H         LINE#         90
-  C:0AD8H         LINE#         91
-  C:0AD8H         LINE#         92
-  C:0AD8H         LINE#         93
-  C:0AE6H         LINE#         94
-  C:0AE8H         LINE#         95
-  C:0AE8H         LINE#         96
-  C:0AF6H         LINE#         97
-  C:0AF8H         LINE#         98
-  C:0AF8H         LINE#         99
-  C:0B06H         LINE#         100
-  C:0B08H         LINE#         101
-  C:0B08H         LINE#         102
-  C:0B16H         LINE#         103
-  C:0B18H         LINE#         104
-  C:0B18H         LINE#         105
-  C:0B26H         LINE#         106
-  C:0B26H         LINE#         107
-  C:0B26H         LINE#         108
-  C:0B26H         LINE#         109
-  C:0B26H         LINE#         110
-  C:0B28H         LINE#         111
+  C:0B53H         LINE#         85
+  C:0B53H         LINE#         87
+  C:0B5AH         LINE#         88
+  C:0B5EH         LINE#         90
+  C:0B6FH         LINE#         91
+  C:0B6FH         LINE#         92
+  C:0B6FH         LINE#         93
+  C:0B7DH         LINE#         94
+  C:0B7FH         LINE#         95
+  C:0B7FH         LINE#         96
+  C:0B8DH         LINE#         97
+  C:0B8FH         LINE#         98
+  C:0B8FH         LINE#         99
+  C:0B9DH         LINE#         100
+  C:0B9FH         LINE#         101
+  C:0B9FH         LINE#         102
+  C:0BADH         LINE#         103
+  C:0BAFH         LINE#         104
+  C:0BAFH         LINE#         105
+  C:0BBDH         LINE#         106
+  C:0BBDH         LINE#         107
+  C:0BBDH         LINE#         108
+  C:0BBDH         LINE#         109
+  C:0BBDH         LINE#         110
+  C:0BBFH         LINE#         111
   -------         ENDPROC       _HALGPIOPINVALUEGET
   -------         PROC          _TIMERMODECONFIG
   D:0007H         SYMBOL        timer0
@@ -451,37 +454,37 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   -------         DO            
   D:0007H         SYMBOL        config
   -------         ENDDO         
-  C:0ED7H         LINE#         113
-  C:0ED7H         LINE#         114
-  C:0ED7H         LINE#         115
-  C:0EE2H         LINE#         116
-  C:0EE4H         LINE#         117
+  C:0F05H         LINE#         113
+  C:0F05H         LINE#         114
+  C:0F05H         LINE#         115
+  C:0F10H         LINE#         116
+  C:0F12H         LINE#         117
   -------         ENDPROC       _TIMERMODECONFIG
   -------         PROC          SYSTIMERINIT
-  C:0F01H         LINE#         119
-  C:0F01H         LINE#         120
-  C:0F01H         LINE#         121
-  C:0F04H         LINE#         122
-  C:0F07H         LINE#         123
-  C:0F09H         LINE#         124
-  C:0F0BH         LINE#         125
+  C:0F2FH         LINE#         119
+  C:0F2FH         LINE#         120
+  C:0F2FH         LINE#         121
+  C:0F32H         LINE#         122
+  C:0F35H         LINE#         123
+  C:0F37H         LINE#         124
+  C:0F39H         LINE#         125
   -------         ENDPROC       SYSTIMERINIT
   -------         PROC          TIME0_INT
-  C:0E2AH         LINE#         127
-  C:0E33H         LINE#         129
-  C:0E36H         LINE#         130
-  C:0E39H         LINE#         131
-  C:0E44H         LINE#         132
+  C:0E58H         LINE#         127
+  C:0E61H         LINE#         129
+  C:0E64H         LINE#         130
+  C:0E67H         LINE#         131
+  C:0E72H         LINE#         132
   -------         ENDPROC       TIME0_INT
   -------         PROC          _HALIRQENABLESET
   D:0007H         SYMBOL        enable
-  C:0F14H         LINE#         134
-  C:0F14H         LINE#         135
-  C:0F14H         LINE#         136
-  C:0F19H         LINE#         137
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 9
+  C:0F42H         LINE#         134
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 9
 
 
+  C:0F42H         LINE#         135
+  C:0F42H         LINE#         136
+  C:0F47H         LINE#         137
   -------         ENDPROC       _HALIRQENABLESET
   -------         PROC          HALSYSTIME
   C:0003H         LINE#         139
@@ -492,15 +495,15 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   -------         PROC          _HALPULSEINFOINIT
   D:0007H         SYMBOL        index
   D:0001H         SYMBOL        info
-  C:0E06H         LINE#         144
-  C:0E06H         LINE#         145
-  C:0E06H         LINE#         146
-  C:0E0CH         LINE#         147
-  C:0E0CH         LINE#         148
-  C:0E0FH         LINE#         149
-  C:0E0FH         LINE#         150
-  C:0E27H         LINE#         151
-  C:0E29H         LINE#         152
+  C:0E34H         LINE#         144
+  C:0E34H         LINE#         145
+  C:0E34H         LINE#         146
+  C:0E3AH         LINE#         147
+  C:0E3AH         LINE#         148
+  C:0E3DH         LINE#         149
+  C:0E3DH         LINE#         150
+  C:0E55H         LINE#         151
+  C:0E57H         LINE#         152
   -------         ENDPROC       _HALPULSEINFOINIT
   -------         PROC          _HALPULSEINFOGET
   D:0007H         SYMBOL        index
@@ -513,63 +516,63 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   D:0002H         SYMBOL        index
   D:0005H         SYMBOL        dir
   D:0003H         SYMBOL        count
-  X:00A8H         SYMBOL        enable
-  C:0734H         LINE#         159
-  C:0736H         LINE#         160
-  C:0736H         LINE#         161
-  C:073CH         LINE#         162
-  C:073CH         LINE#         163
-  C:073FH         LINE#         164
-  C:073FH         LINE#         165
-  C:074DH         LINE#         166
-  C:0758H         LINE#         167
-  C:0762H         LINE#         168
-  C:076CH         LINE#         169
-  C:0779H         LINE#         171
-  C:077CH         LINE#         172
-  C:077CH         LINE#         173
-  C:077FH         LINE#         174
-  C:077FH         LINE#         175
-  C:078BH         LINE#         176
-  C:078DH         LINE#         178
-  C:078DH         LINE#         179
-  C:079CH         LINE#         180
-  C:079CH         LINE#         181
-  C:07A9H         LINE#         182
-  C:07A9H         LINE#         183
-  C:07ABH         LINE#         184
-  C:07ABH         LINE#         185
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 10
+  X:00A9H         SYMBOL        enable
+  C:074BH         LINE#         159
+  C:074DH         LINE#         160
+  C:074DH         LINE#         161
+  C:0753H         LINE#         162
+  C:0753H         LINE#         163
+  C:0756H         LINE#         164
+  C:0756H         LINE#         165
+  C:0764H         LINE#         166
+  C:076FH         LINE#         167
+  C:0779H         LINE#         168
+  C:0783H         LINE#         169
+  C:0790H         LINE#         171
+  C:0793H         LINE#         172
+  C:0793H         LINE#         173
+  C:0796H         LINE#         174
+  C:0796H         LINE#         175
+  C:07A2H         LINE#         176
+  C:07A4H         LINE#         178
+  C:07A4H         LINE#         179
+  C:07B3H         LINE#         180
+  C:07B3H         LINE#         181
+  C:07C0H         LINE#         182
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 10
 
 
-  C:07ADH         LINE#         187
-  C:07ADH         LINE#         188
-  C:07BAH         LINE#         189
-  C:07BAH         LINE#         190
-  C:07BFH         LINE#         191
-  C:07BFH         LINE#         192
-  C:07BFH         LINE#         193
-  C:07C1H         LINE#         194
+  C:07C0H         LINE#         183
+  C:07C2H         LINE#         184
+  C:07C2H         LINE#         185
+  C:07C4H         LINE#         187
+  C:07C4H         LINE#         188
+  C:07D1H         LINE#         189
+  C:07D1H         LINE#         190
+  C:07D6H         LINE#         191
+  C:07D6H         LINE#         192
+  C:07D6H         LINE#         193
+  C:07D8H         LINE#         194
   -------         ENDPROC       _HALPULSEINFOSET
   -------         PROC          _HALPULSESTART
   D:0006H         SYMBOL        period
-  X:00A4H         SYMBOL        cb
+  X:00A5H         SYMBOL        cb
   -------         DO            
   D:0004H         SYMBOL        count
-  X:00A7H         SYMBOL        timeCount
+  X:00A8H         SYMBOL        timeCount
   -------         ENDDO         
-  C:09D7H         LINE#         200
-  C:09E1H         LINE#         201
-  C:09E1H         LINE#         202
-  C:09FCH         LINE#         203
-  C:0A06H         LINE#         205
-  C:0A19H         LINE#         207
-  C:0A30H         LINE#         208
-  C:0A41H         LINE#         209
-  C:0A45H         LINE#         210
-  C:0A47H         LINE#         211
-  C:0A49H         LINE#         212
-  C:0A4BH         LINE#         213
+  C:0A6AH         LINE#         200
+  C:0A74H         LINE#         201
+  C:0A74H         LINE#         202
+  C:0A8FH         LINE#         203
+  C:0A99H         LINE#         205
+  C:0AACH         LINE#         207
+  C:0AC3H         LINE#         208
+  C:0AD4H         LINE#         209
+  C:0AD8H         LINE#         210
+  C:0ADAH         LINE#         211
+  C:0ADCH         LINE#         212
+  C:0ADEH         LINE#         213
   -------         ENDPROC       _HALPULSESTART
   -------         PROC          HALPULSESTOP
   C:001EH         LINE#         215
@@ -580,7 +583,7 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   -------         ENDPROC       HALPULSESTOP
   -------         PROC          TIME1_INT
   -------         DO            
-  X:00F8H         SYMBOL        i
+  X:00F9H         SYMBOL        i
   -------         ENDDO         
   C:04B8H         LINE#         223
   C:04D5H         LINE#         226
@@ -596,12 +599,12 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   C:052EH         LINE#         236
   C:0530H         LINE#         238
   C:0530H         LINE#         239
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 11
+
+
   C:054AH         LINE#         240
   C:0558H         LINE#         241
   C:0558H         LINE#         242
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 11
-
-
   C:0563H         LINE#         243
   C:0563H         LINE#         244
   C:0578H         LINE#         245
@@ -612,258 +615,258 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   C:0589H         LINE#         250
   -------         ENDPROC       TIME1_INT
   -------         PROC          HALGETDEVADDR
-  C:0F2AH         LINE#         252
-  C:0F2AH         LINE#         253
-  C:0F2AH         LINE#         261
-  C:0F2CH         LINE#         263
+  C:0F5DH         LINE#         252
+  C:0F5DH         LINE#         253
+  C:0F5DH         LINE#         261
+  C:0F5FH         LINE#         263
   -------         ENDPROC       HALGETDEVADDR
   -------         PROC          _HALUARTINIT
   D:0001H         SYMBOL        cb
-  C:0D93H         LINE#         267
-  C:0D93H         LINE#         268
-  C:0D93H         LINE#         269
-  C:0D9DH         LINE#         270
-  C:0DA2H         LINE#         271
-  C:0DA5H         LINE#         272
-  C:0DA8H         LINE#         273
-  C:0DABH         LINE#         274
-  C:0DAEH         LINE#         275
-  C:0DB1H         LINE#         276
-  C:0DB4H         LINE#         277
-  C:0DB6H         LINE#         278
+  C:0DC1H         LINE#         267
+  C:0DC1H         LINE#         268
+  C:0DC1H         LINE#         269
+  C:0DCBH         LINE#         270
+  C:0DD0H         LINE#         271
+  C:0DD3H         LINE#         272
+  C:0DD6H         LINE#         273
+  C:0DD9H         LINE#         274
+  C:0DDCH         LINE#         275
+  C:0DDFH         LINE#         276
+  C:0DE2H         LINE#         277
+  C:0DE4H         LINE#         278
   -------         ENDPROC       _HALUARTINIT
   -------         PROC          _HALUARTSEND
-  X:00F5H         SYMBOL        dat
+  X:00F6H         SYMBOL        dat
   D:0005H         SYMBOL        len
   -------         DO            
   D:0007H         SYMBOL        i
   -------         ENDDO         
-  C:0D33H         LINE#         281
-  C:0D3DH         LINE#         282
-  C:0D3DH         LINE#         285
-  C:0D44H         LINE#         286
-  C:0D44H         LINE#         287
-  C:0D46H         LINE#         288
-  C:0D5AH         LINE#         289
-  C:0D5DH         LINE#         290
-  C:0D5FH         LINE#         291
-  C:0D62H         LINE#         292
+  C:0D61H         LINE#         281
+  C:0D6BH         LINE#         282
+  C:0D6BH         LINE#         285
+  C:0D72H         LINE#         286
+  C:0D72H         LINE#         287
+  C:0D74H         LINE#         288
+  C:0D88H         LINE#         289
+  C:0D8BH         LINE#         290
+  C:0D8DH         LINE#         291
+  C:0D90H         LINE#         292
   -------         ENDPROC       _HALUARTSEND
   -------         PROC          UARTIRQ
-  C:0B92H         LINE#         294
-  C:0BAFH         LINE#         296
-  C:0BB2H         LINE#         297
-  C:0BB2H         LINE#         298
-  C:0BBFH         LINE#         299
-  C:0BBFH         LINE#         300
-  C:0BCFH         LINE#         301
-  C:0BCFH         LINE#         302
-  C:0BD1H         LINE#         303
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 12
+  C:0BC0H         LINE#         294
+  C:0BDDH         LINE#         296
+  C:0BE0H         LINE#         297
+  C:0BE0H         LINE#         298
+  C:0BEDH         LINE#         299
+  C:0BEDH         LINE#         300
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 12
 
 
-  C:0BD1H         LINE#         304
+  C:0BFDH         LINE#         301
+  C:0BFDH         LINE#         302
+  C:0BFFH         LINE#         303
+  C:0BFFH         LINE#         304
   -------         ENDPROC       UARTIRQ
   -------         PROC          HALINIT
-  C:0EC8H         LINE#         306
-  C:0EC8H         LINE#         307
-  C:0EC8H         LINE#         308
-  C:0ECFH         LINE#         309
-  C:0ED2H         LINE#         310
+  C:0EF6H         LINE#         306
+  C:0EF6H         LINE#         307
+  C:0EF6H         LINE#         308
+  C:0EFDH         LINE#         309
+  C:0F00H         LINE#         310
   -------         ENDPROC       HALINIT
   -------         ENDMOD        HAL
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0F0CH         PUBLIC        main
+  C:0F3AH         PUBLIC        main
   -------         PROC          MAIN
-  C:0F0CH         LINE#         3
-  C:0F0CH         LINE#         4
-  C:0F0CH         LINE#         5
-  C:0F0FH         LINE#         6
-  C:0F0FH         LINE#         7
-  C:0F0FH         LINE#         8
-  C:0F12H         LINE#         9
+  C:0F3AH         LINE#         3
+  C:0F3AH         LINE#         4
+  C:0F3AH         LINE#         5
+  C:0F3DH         LINE#         6
+  C:0F3DH         LINE#         7
+  C:0F3DH         LINE#         8
+  C:0F40H         LINE#         9
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
   -------         MODULE        MOTOR
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0EA7H         PUBLIC        _MotorTriggeredRegister
+  C:0ED5H         PUBLIC        _MotorTriggeredRegister
   X:001AH         SYMBOL        g_sensorTriggered
   X:0020H         SYMBOL        g_eventCb
-  C:0DBAH         PUBLIC        _MotorStart
-  C:0BECH         PUBLIC        _MotorInit
+  C:0DE8H         PUBLIC        _MotorStart
+  C:0C1AH         PUBLIC        _MotorInit
   X:0023H         SYMBOL        g_motorNum
-  C:0C9FH         PUBLIC        MotorPoll
-  C:0E4BH         PUBLIC        _MotorStop
-  C:0EB8H         SYMBOL        _motorStepOverHandle
+  C:0CCDH         PUBLIC        MotorPoll
+  C:0E79H         PUBLIC        _MotorStop
+  C:0EE6H         SYMBOL        _motorStepOverHandle
   -------         PROC          _MOTORSTEPOVERHANDLE
   D:0007H         SYMBOL        id
-  C:0EB8H         LINE#         15
-  C:0EB8H         LINE#         16
-  C:0EB8H         LINE#         17
+  C:0EE6H         LINE#         15
+  C:0EE6H         LINE#         16
+  C:0EE6H         LINE#         17
   -------         ENDPROC       _MOTORSTEPOVERHANDLE
   -------         PROC          _MOTORINIT
   D:0001H         SYMBOL        cb
   -------         DO            
-  X:009CH         SYMBOL        info
+  X:009DH         SYMBOL        info
   -------         ENDDO         
-  C:0BECH         LINE#         20
-  C:0BECH         LINE#         21
-  C:0BECH         LINE#         24
-  C:0BF6H         LINE#         26
-  C:0BFAH         LINE#         27
-  C:0BFDH         LINE#         28
-  C:0C00H         LINE#         29
-  C:0C02H         LINE#         30
-  C:0C07H         LINE#         31
-  C:0C0CH         LINE#         32
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 13
+  C:0C1AH         LINE#         20
+  C:0C1AH         LINE#         21
+  C:0C1AH         LINE#         24
+  C:0C24H         LINE#         26
+  C:0C28H         LINE#         27
+  C:0C2BH         LINE#         28
+  C:0C2EH         LINE#         29
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 13
 
 
-  C:0C10H         LINE#         33
-  C:0C1BH         LINE#         34
-  C:0C20H         LINE#         36
-  C:0C25H         LINE#         37
-  C:0C29H         LINE#         38
-  C:0C34H         LINE#         39
-  C:0C39H         LINE#         41
+  C:0C30H         LINE#         30
+  C:0C35H         LINE#         31
+  C:0C3AH         LINE#         32
+  C:0C3EH         LINE#         33
+  C:0C49H         LINE#         34
+  C:0C4EH         LINE#         36
+  C:0C53H         LINE#         37
+  C:0C57H         LINE#         38
+  C:0C62H         LINE#         39
+  C:0C67H         LINE#         41
   -------         ENDPROC       _MOTORINIT
   -------         PROC          _MOTORTRIGGEREDREGISTER
   D:0007H         SYMBOL        index
   D:0001H         SYMBOL        cb
-  C:0EA7H         LINE#         44
-  C:0EA7H         LINE#         45
-  C:0EA7H         LINE#         46
-  C:0EB7H         LINE#         47
+  C:0ED5H         LINE#         44
+  C:0ED5H         LINE#         45
+  C:0ED5H         LINE#         46
+  C:0EE5H         LINE#         47
   -------         ENDPROC       _MOTORTRIGGEREDREGISTER
   -------         PROC          _MOTORSTART
-  X:00A2H         SYMBOL        index
-  X:00A3H         SYMBOL        dir
-  X:00A4H         SYMBOL        count
-  C:0DBAH         LINE#         49
-  C:0DC4H         LINE#         50
-  C:0DC4H         LINE#         51
-  C:0DC9H         LINE#         52
-  C:0DDBH         LINE#         53
+  X:00A3H         SYMBOL        index
+  X:00A4H         SYMBOL        dir
+  X:00A5H         SYMBOL        count
+  C:0DE8H         LINE#         49
+  C:0DF2H         LINE#         50
+  C:0DF2H         LINE#         51
+  C:0DF7H         LINE#         52
+  C:0E09H         LINE#         53
   -------         ENDPROC       _MOTORSTART
   -------         PROC          _MOTORSTOP
-  X:009CH         SYMBOL        index
-  C:0E4BH         LINE#         56
-  C:0E4FH         LINE#         57
-  C:0E4FH         LINE#         58
-  C:0E54H         LINE#         59
-  C:0E61H         LINE#         60
+  X:009DH         SYMBOL        index
+  C:0E79H         LINE#         56
+  C:0E7DH         LINE#         57
+  C:0E7DH         LINE#         58
+  C:0E82H         LINE#         59
+  C:0E8FH         LINE#         60
   -------         ENDPROC       _MOTORSTOP
   -------         PROC          MOTORPOLL
   -------         DO            
-  X:009CH         SYMBOL        i
+  X:009DH         SYMBOL        i
   -------         ENDDO         
-  C:0C9FH         LINE#         63
-  C:0C9FH         LINE#         64
-  C:0C9FH         LINE#         67
-  C:0CACH         LINE#         68
-  C:0CACH         LINE#         69
-  C:0CD3H         LINE#         70
-  C:0CD3H         LINE#         71
-  C:0CE7H         LINE#         72
-  C:0CE7H         LINE#         73
-  C:0CEEH         LINE#         74
+  C:0CCDH         LINE#         63
+  C:0CCDH         LINE#         64
+  C:0CCDH         LINE#         67
+  C:0CDAH         LINE#         68
+  C:0CDAH         LINE#         69
+  C:0D01H         LINE#         70
+  C:0D01H         LINE#         71
+  C:0D15H         LINE#         72
+  C:0D15H         LINE#         73
+  C:0D1CH         LINE#         74
   -------         ENDPROC       MOTORPOLL
   -------         ENDMOD        MOTOR
 
   -------         MODULE        MPROTO
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0F1AH         PUBLIC        MProtoPoll
-  C:0DE0H         PUBLIC        _MProtoCtrlResult
+  C:0F48H         PUBLIC        MProtoPoll
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 14
+
+
+  C:0E0EH         PUBLIC        _MProtoCtrlResult
   X:0025H         SYMBOL        g_msgIndex
-  C:08D3H         PUBLIC        _MprotoSend
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 14
-
-
+  C:08EDH         PUBLIC        _MprotoSend
   X:0026H         SYMBOL        g_broadcastTime
   C:067FH         SYMBOL        mprotoPrase
   X:0028H         SYMBOL        g_frameRecved
   X:0029H         SYMBOL        g_frameBuffer
-  C:0958H         SYMBOL        _mprotoRecv
+  C:0972H         SYMBOL        _mprotoRecv
   C:038CH         SYMBOL        _controlOpt
   X:0069H         SYMBOL        g_controlIndex
-  C:0C46H         SYMBOL        broadcastAck
+  C:0C74H         SYMBOL        broadcastAck
   X:006AH         SYMBOL        g_sysEventCb
   X:006DH         SYMBOL        g_frameDataCount
-  C:0D69H         SYMBOL        _checkFrame
+  C:0D97H         SYMBOL        _checkFrame
   X:006EH         SYMBOL        g_steps
-  C:0E94H         PUBLIC        _MProtoInit
+  C:0EC2H         PUBLIC        _MProtoInit
   X:0097H         SYMBOL        g_broadcastFlag
-  -------         PROC          L?0044
-  -------         ENDPROC       L?0044
+  -------         PROC          L?0046
+  -------         ENDPROC       L?0046
   -------         PROC          _CHECKFRAME
-  X:00F5H         SYMBOL        dat
+  X:00F6H         SYMBOL        dat
   D:0005H         SYMBOL        len
   -------         DO            
   D:0007H         SYMBOL        count
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:0D69H         LINE#         20
-  C:0D73H         LINE#         21
-  C:0D73H         LINE#         22
-  C:0D75H         LINE#         25
-  C:0D7BH         LINE#         26
-  C:0D7BH         LINE#         27
-  C:0D8FH         LINE#         28
-  C:0D92H         LINE#         29
-  C:0D92H         LINE#         30
+  C:0D97H         LINE#         20
+  C:0DA1H         LINE#         21
+  C:0DA1H         LINE#         22
+  C:0DA3H         LINE#         25
+  C:0DA9H         LINE#         26
+  C:0DA9H         LINE#         27
+  C:0DBDH         LINE#         28
+  C:0DC0H         LINE#         29
+  C:0DC0H         LINE#         30
   -------         ENDPROC       _CHECKFRAME
   -------         PROC          _MPROTOSEND
   D:0007H         SYMBOL        cmd
-  X:00AFH         SYMBOL        dat
-  X:00B2H         SYMBOL        len
-  X:00B3H         SYMBOL        sn
-  X:00B4H         SYMBOL        needAck
+  X:00B0H         SYMBOL        dat
+  X:00B3H         SYMBOL        len
+  X:00B4H         SYMBOL        sn
+  X:00B5H         SYMBOL        needAck
   -------         DO            
-  X:00B5H         SYMBOL        buffer
+  X:00B6H         SYMBOL        buffer
   D:0001H         SYMBOL        proto
   -------         ENDDO         
-  C:08D3H         LINE#         32
-  C:08DDH         LINE#         33
-  C:08DDH         LINE#         35
-  C:08E3H         LINE#         37
-  C:08E8H         LINE#         38
-  C:08F0H         LINE#         39
-  C:08FAH         LINE#         40
-  C:0903H         LINE#         41
-  C:090AH         LINE#         42
-  C:090FH         LINE#         43
-  C:090FH         LINE#         44
-  C:091EH         LINE#         45
-  C:091EH         LINE#         46
-  C:0939H         LINE#         47
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 15
+  C:08EDH         LINE#         32
+  C:08F7H         LINE#         33
+  C:08F7H         LINE#         35
+  C:08FDH         LINE#         37
+  C:0902H         LINE#         38
+  C:090AH         LINE#         39
+  C:0914H         LINE#         40
+  C:091DH         LINE#         41
+  C:0924H         LINE#         42
+  C:0929H         LINE#         43
+  C:0929H         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 15
 
 
-  C:094BH         LINE#         49
+  C:0938H         LINE#         45
+  C:0938H         LINE#         46
+  C:0953H         LINE#         47
+  C:0965H         LINE#         49
   -------         ENDPROC       _MPROTOSEND
   -------         PROC          _MPROTOCTRLRESULT
   D:0007H         SYMBOL        result
   -------         DO            
-  X:00ACH         SYMBOL        dat
+  X:00ADH         SYMBOL        dat
   -------         ENDDO         
-  C:0DE0H         LINE#         52
-  C:0DE0H         LINE#         53
-  C:0DE0H         LINE#         55
-  C:0DE6H         LINE#         56
-  C:0DE9H         LINE#         57
+  C:0E0EH         LINE#         52
+  C:0E0EH         LINE#         53
+  C:0E0EH         LINE#         55
+  C:0E14H         LINE#         56
+  C:0E17H         LINE#         57
   -------         ENDPROC       _MPROTOCTRLRESULT
   -------         PROC          _CONTROLOPT
-  X:00A2H         SYMBOL        contents
+  X:00A3H         SYMBOL        contents
   -------         DO            
   D:0007H         SYMBOL        i
-  X:00A5H         SYMBOL        j
-  X:00A6H         SYMBOL        n
-  X:00A7H         SYMBOL        steps
-  X:00AAH         SYMBOL        type
-  X:00ABH         SYMBOL        replay
+  X:00A6H         SYMBOL        j
+  X:00A7H         SYMBOL        n
+  X:00A8H         SYMBOL        steps
+  X:00ABH         SYMBOL        type
+  X:00ACH         SYMBOL        replay
   -------         ENDDO         
   C:038CH         LINE#         60
   C:0396H         LINE#         61
@@ -891,61 +894,61 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   C:04B7H         LINE#         87
   -------         ENDPROC       _CONTROLOPT
   -------         PROC          _MPROTORECV
-  X:009CH         SYMBOL        byte
+  X:009DH         SYMBOL        byte
   -------         DO            
   X:0024H         SYMBOL        frameDataLen
   -------         ENDDO         
-  C:0958H         LINE#         89
-  C:095CH         LINE#         90
-  C:095CH         LINE#         93
-  C:0964H         LINE#         94
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 16
+  C:0972H         LINE#         89
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 16
 
 
-  C:0964H         LINE#         95
-  C:0966H         LINE#         96
-  C:0966H         LINE#         97
-  C:0976H         LINE#         99
-  C:0984H         LINE#         100
-  C:0984H         LINE#         101
-  C:0984H         LINE#         102
-  C:0989H         LINE#         103
-  C:0989H         LINE#         104
-  C:0989H         LINE#         105
-  C:0989H         LINE#         106
-  C:098BH         LINE#         107
-  C:098BH         LINE#         108
-  C:0999H         LINE#         109
-  C:0999H         LINE#         110
-  C:0999H         LINE#         111
-  C:0999H         LINE#         112
-  C:099BH         LINE#         113
-  C:099BH         LINE#         114
-  C:09A4H         LINE#         115
-  C:09A4H         LINE#         116
-  C:09A4H         LINE#         117
-  C:09A6H         LINE#         119
-  C:09A6H         LINE#         120
-  C:09AAH         LINE#         121
-  C:09AAH         LINE#         122
-  C:09ABH         LINE#         123
-  C:09ABH         LINE#         124
-  C:09BEH         LINE#         125
-  C:09BEH         LINE#         126
-  C:09CDH         LINE#         127
-  C:09CDH         LINE#         128
-  C:09D2H         LINE#         129
-  C:09D2H         LINE#         130
-  C:09D6H         LINE#         131
-  C:09D6H         LINE#         132
-  C:09D6H         LINE#         133
-  C:09D6H         LINE#         134
+  C:0976H         LINE#         90
+  C:0976H         LINE#         93
+  C:097EH         LINE#         94
+  C:097EH         LINE#         95
+  C:0980H         LINE#         96
+  C:0980H         LINE#         97
+  C:0990H         LINE#         99
+  C:099EH         LINE#         100
+  C:099EH         LINE#         101
+  C:099EH         LINE#         102
+  C:09A3H         LINE#         103
+  C:09A3H         LINE#         104
+  C:09A3H         LINE#         105
+  C:09A3H         LINE#         106
+  C:09A5H         LINE#         107
+  C:09A5H         LINE#         108
+  C:09B3H         LINE#         109
+  C:09B3H         LINE#         110
+  C:09B3H         LINE#         111
+  C:09B3H         LINE#         112
+  C:09B5H         LINE#         113
+  C:09B5H         LINE#         114
+  C:09BEH         LINE#         115
+  C:09BEH         LINE#         116
+  C:09BEH         LINE#         117
+  C:09C0H         LINE#         119
+  C:09C0H         LINE#         120
+  C:09C4H         LINE#         121
+  C:09C4H         LINE#         122
+  C:09C5H         LINE#         123
+  C:09C5H         LINE#         124
+  C:09D8H         LINE#         125
+  C:09D8H         LINE#         126
+  C:09E7H         LINE#         127
+  C:09E7H         LINE#         128
+  C:09ECH         LINE#         129
+  C:09ECH         LINE#         130
+  C:09F0H         LINE#         131
+  C:09F0H         LINE#         132
+  C:09F0H         LINE#         133
+  C:09F0H         LINE#         134
   -------         ENDPROC       _MPROTORECV
   -------         PROC          MPROTOPRASE
   -------         DO            
-  X:009CH         SYMBOL        mproto
+  X:009DH         SYMBOL        mproto
   D:0007H         SYMBOL        cmd
-  X:009FH         SYMBOL        content
+  X:00A0H         SYMBOL        content
   -------         ENDDO         
   C:067FH         LINE#         136
   C:067FH         LINE#         137
@@ -956,12 +959,12 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   C:069FH         LINE#         146
   C:06A8H         LINE#         147
   C:06A8H         LINE#         148
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 17
+
+
   C:06CAH         LINE#         149
   C:06CAH         LINE#         150
   C:06DDH         LINE#         151
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 17
-
-
   C:06E7H         LINE#         152
   C:06E7H         LINE#         153
   C:06E7H         LINE#         154
@@ -973,85 +976,93 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   C:0714H         LINE#         160
   C:0714H         LINE#         161
   C:072CH         LINE#         162
-  C:072FH         LINE#         163
-  C:072FH         LINE#         164
-  C:072FH         LINE#         165
-  C:072FH         LINE#         166
-  C:072FH         LINE#         167
-  C:072FH         LINE#         168
-  C:072FH         LINE#         169
-  C:0733H         LINE#         170
-  C:0733H         LINE#         171
+  C:0732H         LINE#         163
+  C:0732H         LINE#         164
+  C:073FH         LINE#         165
+  C:0741H         LINE#         167
+  C:0741H         LINE#         168
+  C:0746H         LINE#         169
+  C:0746H         LINE#         170
+  C:0746H         LINE#         171
+  C:0746H         LINE#         172
+  C:0746H         LINE#         173
+  C:0746H         LINE#         174
+  C:0746H         LINE#         175
+  C:0746H         LINE#         176
+  C:074AH         LINE#         177
+  C:074AH         LINE#         178
   -------         ENDPROC       MPROTOPRASE
   -------         PROC          BROADCASTACK
   -------         DO            
-  X:009CH         SYMBOL        addr
+  X:009DH         SYMBOL        addr
   -------         ENDDO         
-  C:0C46H         LINE#         173
-  C:0C46H         LINE#         174
-  C:0C46H         LINE#         176
-  C:0C77H         LINE#         177
-  C:0C77H         LINE#         178
-  C:0C7EH         LINE#         179
-  C:0C9AH         LINE#         180
-  C:0C9EH         LINE#         181
-  C:0C9EH         LINE#         182
+  C:0C74H         LINE#         180
+  C:0C74H         LINE#         181
+  C:0C74H         LINE#         183
+  C:0CA5H         LINE#         184
+  C:0CA5H         LINE#         185
+  C:0CACH         LINE#         186
+  C:0CC8H         LINE#         187
+  C:0CCCH         LINE#         188
+  C:0CCCH         LINE#         189
   -------         ENDPROC       BROADCASTACK
   -------         PROC          _MPROTOINIT
   D:0001H         SYMBOL        cb
-  C:0E94H         LINE#         184
-  C:0E94H         LINE#         185
-  C:0E94H         LINE#         186
-  C:0E9EH         LINE#         187
+  C:0EC2H         LINE#         191
+  C:0EC2H         LINE#         192
+  C:0EC2H         LINE#         193
+  C:0ECCH         LINE#         194
   -------         ENDPROC       _MPROTOINIT
   -------         PROC          MPROTOPOLL
-  C:0F1AH         LINE#         190
-  C:0F1AH         LINE#         191
-  C:0F1AH         LINE#         192
-  C:0F1DH         LINE#         193
+  C:0F48H         LINE#         197
+  C:0F48H         LINE#         198
+  C:0F48H         LINE#         199
+  C:0F4BH         LINE#         200
   -------         ENDPROC       MPROTOPOLL
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 18
+
+
   -------         ENDMOD        MPROTO
 
   -------         MODULE        SYS
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0F26H         PUBLIC        SysGetDevAddr
-  C:0E7EH         SYMBOL        sysMotorInit
+  C:0F59H         PUBLIC        SysGetDevAddr
+  C:0EACH         SYMBOL        sysMotorInit
   X:0098H         SYMBOL        g_stepCount
-  C:0A4CH         SYMBOL        _sysEventHandle
-  X:0099H         SYMBOL        g_curStepInfo
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 18
-
-
-  C:0EE5H         SYMBOL        sysMotor1SensorTriggered
-  C:0EF3H         SYMBOL        sysMotor2SensorTriggered
-  C:0B29H         SYMBOL        _sysMotorEventHandle
-  C:0E66H         PUBLIC        SysInit
-  C:0F20H         PUBLIC        SysPoll
+  X:0099H         SYMBOL        g_sysStatus
+  C:0ADFH         SYMBOL        _sysEventHandle
+  X:009AH         SYMBOL        g_curStepInfo
+  C:0F13H         SYMBOL        sysMotor1SensorTriggered
+  C:0F21H         SYMBOL        sysMotor2SensorTriggered
+  C:09F1H         SYMBOL        _sysMotorEventHandle
+  C:0E94H         PUBLIC        SysInit
+  C:0F4EH         PUBLIC        SysPoll
+  C:0F54H         PUBLIC        SysGetStatus
   -------         PROC          SYSMOTOR1SENSORTRIGGERED
-  C:0EE5H         LINE#         8
-  C:0EE5H         LINE#         9
-  C:0EE5H         LINE#         10
-  C:0EEDH         LINE#         11
-  C:0EEDH         LINE#         12
-  C:0EF0H         LINE#         13
-  C:0EF0H         LINE#         14
-  C:0EF2H         LINE#         15
+  C:0F13H         LINE#         9
+  C:0F13H         LINE#         10
+  C:0F13H         LINE#         11
+  C:0F1BH         LINE#         12
+  C:0F1BH         LINE#         13
+  C:0F1EH         LINE#         14
+  C:0F1EH         LINE#         15
+  C:0F20H         LINE#         16
   -------         ENDPROC       SYSMOTOR1SENSORTRIGGERED
   -------         PROC          SYSMOTOR2SENSORTRIGGERED
-  C:0EF3H         LINE#         17
-  C:0EF3H         LINE#         18
-  C:0EF3H         LINE#         19
-  C:0EFBH         LINE#         20
-  C:0EFBH         LINE#         21
-  C:0EFEH         LINE#         22
-  C:0EFEH         LINE#         23
-  C:0F00H         LINE#         24
+  C:0F21H         LINE#         18
+  C:0F21H         LINE#         19
+  C:0F21H         LINE#         20
+  C:0F29H         LINE#         21
+  C:0F29H         LINE#         22
+  C:0F2CH         LINE#         23
+  C:0F2CH         LINE#         24
+  C:0F2EH         LINE#         25
   -------         ENDPROC       SYSMOTOR2SENSORTRIGGERED
   -------         PROC          SYSMOTORINIT
-  C:0E7EH         LINE#         27
-  C:0E7EH         LINE#         28
-  C:0E7EH         LINE#         29
-  C:0E89H         LINE#         30
+  C:0EACH         LINE#         28
+  C:0EACH         LINE#         29
+  C:0EACH         LINE#         30
+  C:0EB7H         LINE#         31
   -------         ENDPROC       SYSMOTORINIT
   -------         PROC          _SYSMOTOREVENTHANDLE
   D:0007H         SYMBOL        id
@@ -1059,89 +1070,97 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   -------         DO            
   D:0006H         SYMBOL        doNextStep
   -------         ENDDO         
-  C:0B29H         LINE#         36
-  C:0B29H         LINE#         37
-  C:0B29H         LINE#         38
-  C:0B2BH         LINE#         40
-  C:0B2EH         LINE#         41
-  C:0B2EH         LINE#         42
-  C:0B2FH         LINE#         43
-  C:0B31H         LINE#         44
-  C:0B35H         LINE#         45
-  C:0B35H         LINE#         46
-  C:0B49H         LINE#         47
-  C:0B49H         LINE#         48
-  C:0B4BH         LINE#         49
-  C:0B4BH         LINE#         50
-  C:0B4BH         LINE#         52
-  C:0B4EH         LINE#         53
-  C:0B4EH         LINE#         54
-  C:0B51H         LINE#         55
-  C:0B56H         LINE#         56
-  C:0B56H         LINE#         57
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 19
+  C:09F1H         LINE#         37
+  C:09F1H         LINE#         38
+  C:09F1H         LINE#         39
+  C:09F3H         LINE#         41
+  C:09F6H         LINE#         42
+  C:09F6H         LINE#         43
+  C:09F7H         LINE#         44
+  C:09F9H         LINE#         45
+  C:09FDH         LINE#         46
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 19
 
 
-  C:0B5AH         LINE#         58
-  C:0B62H         LINE#         59
-  C:0B63H         LINE#         61
-  C:0B63H         LINE#         62
-  C:0B6EH         LINE#         63
-  C:0B73H         LINE#         64
-  C:0B91H         LINE#         65
-  C:0B91H         LINE#         66
-  C:0B91H         LINE#         67
+  C:09FDH         LINE#         47
+  C:0A1EH         LINE#         48
+  C:0A1EH         LINE#         49
+  C:0A20H         LINE#         50
+  C:0A20H         LINE#         51
+  C:0A20H         LINE#         53
+  C:0A23H         LINE#         54
+  C:0A23H         LINE#         55
+  C:0A26H         LINE#         56
+  C:0A2BH         LINE#         57
+  C:0A2BH         LINE#         58
+  C:0A2DH         LINE#         59
+  C:0A31H         LINE#         60
+  C:0A39H         LINE#         61
+  C:0A3AH         LINE#         63
+  C:0A3AH         LINE#         64
+  C:0A45H         LINE#         65
+  C:0A4AH         LINE#         66
+  C:0A69H         LINE#         67
+  C:0A69H         LINE#         68
+  C:0A69H         LINE#         69
   -------         ENDPROC       _SYSMOTOREVENTHANDLE
   -------         PROC          _SYSEVENTHANDLE
   D:0007H         SYMBOL        event
-  X:009CH         SYMBOL        args
+  X:009DH         SYMBOL        args
   -------         DO            
-  X:009FH         SYMBOL        stepInfo
+  X:00A0H         SYMBOL        stepInfo
   -------         ENDDO         
-  C:0A4CH         LINE#         69
-  C:0A56H         LINE#         70
-  C:0A56H         LINE#         71
-  C:0A5DH         LINE#         72
-  C:0A61H         LINE#         73
-  C:0A61H         LINE#         74
-  C:0A61H         LINE#         75
-  C:0A61H         LINE#         76
-  C:0A61H         LINE#         77
-  C:0A73H         LINE#         78
-  C:0A8CH         LINE#         79
-  C:0A9DH         LINE#         80
-  C:0ABBH         LINE#         81
-  C:0ABBH         LINE#         82
-  C:0ABBH         LINE#         83
-  C:0ABBH         LINE#         84
-  C:0ABBH         LINE#         85
+  C:0ADFH         LINE#         71
+  C:0AE9H         LINE#         72
+  C:0AE9H         LINE#         73
+  C:0AF0H         LINE#         74
+  C:0AF4H         LINE#         75
+  C:0AF4H         LINE#         76
+  C:0AF4H         LINE#         77
+  C:0AF4H         LINE#         78
+  C:0AF4H         LINE#         79
+  C:0B06H         LINE#         80
+  C:0B1FH         LINE#         81
+  C:0B30H         LINE#         82
+  C:0B34H         LINE#         83
+  C:0B52H         LINE#         84
+  C:0B52H         LINE#         85
+  C:0B52H         LINE#         86
+  C:0B52H         LINE#         87
+  C:0B52H         LINE#         88
   -------         ENDPROC       _SYSEVENTHANDLE
   -------         PROC          SYSINIT
-  C:0E66H         LINE#         87
-  C:0E66H         LINE#         88
-  C:0E66H         LINE#         89
-  C:0E69H         LINE#         90
-  C:0E72H         LINE#         91
-  C:0E7BH         LINE#         92
+  C:0E94H         LINE#         90
+  C:0E94H         LINE#         91
+  C:0E94H         LINE#         92
+  C:0E97H         LINE#         93
+  C:0EA0H         LINE#         94
+  C:0EA9H         LINE#         95
   -------         ENDPROC       SYSINIT
   -------         PROC          SYSPOLL
-  C:0F20H         LINE#         95
-  C:0F20H         LINE#         96
-  C:0F20H         LINE#         97
-  C:0F23H         LINE#         98
+  C:0F4EH         LINE#         98
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 20
+
+
+  C:0F4EH         LINE#         99
+  C:0F4EH         LINE#         100
+  C:0F51H         LINE#         101
   -------         ENDPROC       SYSPOLL
+  -------         PROC          SYSGETSTATUS
+  C:0F54H         LINE#         104
+  C:0F54H         LINE#         105
+  C:0F54H         LINE#         106
+  C:0F58H         LINE#         107
+  -------         ENDPROC       SYSGETSTATUS
   -------         PROC          SYSGETDEVADDR
-  C:0F26H         LINE#         101
-  C:0F26H         LINE#         102
-  C:0F26H         LINE#         103
-  C:0F29H         LINE#         104
+  C:0F59H         LINE#         109
+  C:0F59H         LINE#         110
+  C:0F59H         LINE#         111
+  C:0F5CH         LINE#         112
   -------         ENDPROC       SYSGETDEVADDR
   -------         ENDMOD        SYS
 
   -------         MODULE        ?C?FCAST
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 20
-
-
   C:0030H         PUBLIC        ?C?FCASTC
   C:002BH         PUBLIC        ?C?FCASTI
   C:0026H         PUBLIC        ?C?FCASTL
@@ -1180,11 +1199,14 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   -------         ENDMOD        ?C?UIDIV
 
   -------         MODULE        ?C?ILDOPTR
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  22:45:19  PAGE 21
+
+
   C:0272H         PUBLIC        ?C?ILDOPTR
   -------         ENDMOD        ?C?ILDOPTR
 
   -------         MODULE        ?C?SLDIV
-  C:0CEFH         PUBLIC        ?C?SLDIV
+  C:0D1DH         PUBLIC        ?C?SLDIV
   -------         ENDMOD        ?C?SLDIV
 
   -------         MODULE        ?C?LNEG
@@ -1199,9 +1221,6 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
   -------         MODULE        ?C?ULDIV
   C:02FAH         PUBLIC        ?C?ULDIV
   -------         ENDMOD        ?C?ULDIV
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/10/2016  15:50:44  PAGE 21
-
-
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_HALPULSEINFOGET?HAL
@@ -1209,5 +1228,5 @@ SYMBOL TABLE OF MODULE:  biochemistry (?C_STARTUP)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?HALPULSESTOP?HAL
 
-Program Size: data=9.0 xdata=249 code=3885
+Program Size: data=9.0 xdata=250 code=3936
 LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

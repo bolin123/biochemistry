@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   MPROTO                                                                07/10/2016 15:47:14 PAGE 1   
+C51 COMPILER V9.00   MPROTO                                                                07/10/2016 22:45:19 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MPROTO
@@ -59,10 +59,10 @@ line level    source
   49   1          HalUartSend(buffer, sizeof(MProtoHead_t) + len + 1);
   50   1      }
   51          
-  52          void MProtoCtrlResult(uint8_t result)
+  52          void MProtoCtrlResult(MProtoResult_t result)
   53          {
   54   1          uint8_t dat[2];
-C51 COMPILER V9.00   MPROTO                                                                07/10/2016 15:47:14 PAGE 2   
+C51 COMPILER V9.00   MPROTO                                                                07/10/2016 22:45:19 PAGE 2   
 
   55   1          dat[0] = g_controlIndex;
   56   1          dat[1] = result;
@@ -93,7 +93,7 @@ line level    source
   81   2          }
   82   1          else
   83   1          {
-  84   2              MProtoCtrlResult(1);
+  84   2              MProtoCtrlResult(MPROTO_RESULT_CMD_VALID);
   85   2          }
   86   1      
   87   1      }
@@ -126,7 +126,7 @@ line level    source
  114   2              if(byte > (MPROTO_FRAME_BUFFER_LEN - sizeof(MProtoHead_t)))
  115   2              {
  116   3                  g_frameDataCount = 0;
-C51 COMPILER V9.00   MPROTO                                                                07/10/2016 15:47:14 PAGE 3   
+C51 COMPILER V9.00   MPROTO                                                                07/10/2016 22:45:19 PAGE 3   
 
  117   3              }
  118   2              else
@@ -172,47 +172,54 @@ line level    source
  158   3                  g_sysEventCb(SYS_EVENT_SELFCHECK, NULL);
  159   3                  break;
  160   3              case MPROTO_CMD_MOTOR_CTRL:
- 161   3                  content = (uint8_t *)mproto + 1;
- 162   3                  controlOpt(content);
- 163   3                  break;
- 164   3              case MPROTO_CMD_QUERY:
- 165   3                  break;
- 166   3              default:
- 167   3                  break;
- 168   3              }
- 169   2              g_frameRecved = false;
- 170   2          }
- 171   1      }
- 172          
- 173          static void broadcastAck(void)
- 174          {
- 175   1          uint8_t addr;
- 176   1          if(g_broadcastFlag && SysHasPassTime(g_broadcastTime, SysGetDevAddr() * 1000))
- 177   1          {
- 178   2              addr = SysGetDevAddr();
-C51 COMPILER V9.00   MPROTO                                                                07/10/2016 15:47:14 PAGE 4   
+ 161   3                  content = (uint8_t *)mproto + sizeof(MProtoHead_t);
+ 162   3                  if(SysGetStatus() == SYS_STATUS_IDLE)
+ 163   3                  {
+ 164   4                      controlOpt(content);
+ 165   4                  }
+ 166   3                  else
+ 167   3                  {
+ 168   4                      MProtoCtrlResult(MPROTO_RESULT_BUSY);
+ 169   4                  }
+ 170   3                  break;
+ 171   3              case MPROTO_CMD_QUERY:
+ 172   3                  break;
+ 173   3              default:
+ 174   3                  break;
+ 175   3              }
+ 176   2              g_frameRecved = false;
+ 177   2          }
+ 178   1      }
+C51 COMPILER V9.00   MPROTO                                                                07/10/2016 22:45:19 PAGE 4   
 
- 179   2              MprotoSend(MPROTO_CMD_BROADCAST, &addr, 1, g_msgIndex++, false);
- 180   2              g_broadcastFlag = false;
- 181   2          }
- 182   1      }
- 183          
- 184          void MProtoInit(SysEvent_cb cb)
- 185          {
- 186   1          g_sysEventCb = cb;
- 187   1          HalUartInit(mprotoRecv);
- 188   1      }
- 189          
- 190          void MProtoPoll(void)
- 191          {
- 192   1          mprotoPrase();
- 193   1          broadcastAck();
- 194   1      }
- 195          
+ 179          
+ 180          static void broadcastAck(void)
+ 181          {
+ 182   1          uint8_t addr;
+ 183   1          if(g_broadcastFlag && SysHasPassTime(g_broadcastTime, SysGetDevAddr() * 1000))
+ 184   1          {
+ 185   2              addr = SysGetDevAddr();
+ 186   2              MprotoSend(MPROTO_CMD_BROADCAST, &addr, 1, g_msgIndex++, false);
+ 187   2              g_broadcastFlag = false;
+ 188   2          }
+ 189   1      }
+ 190          
+ 191          void MProtoInit(SysEvent_cb cb)
+ 192          {
+ 193   1          g_sysEventCb = cb;
+ 194   1          HalUartInit(mprotoRecv);
+ 195   1      }
+ 196          
+ 197          void MProtoPoll(void)
+ 198          {
+ 199   1          mprotoPrase();
+ 200   1          broadcastAck();
+ 201   1      }
+ 202          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    941    ----
+   CODE SIZE        =    964    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =    116      94
