@@ -3,11 +3,6 @@
 
 #define MOTOR_NUM 2 //控制电机总数
 
-#define MOTOR1_CONTRL_PIN  0x27     //电机1控制管脚 p27
-#define MOTOR1_DIRECTION_PIN 0x25   //电机1方向管脚 p17
-#define MOTOR2_CONTRL_PIN  0x26     //电机2控制管脚 p26
-#define MOTOR2_DIRECTION_PIN 0x24	//电机2方向管脚 p16
-
 static uint8_t g_motorNum = 0;
 static MotorSensorTriggered g_sensorTriggered[MOTOR_NUM] = {0};
 static MotorEventHandle g_eventCb = NULL;
@@ -27,14 +22,15 @@ void MotorInit(MotorEventHandle cb)
     info.val = 0;
     info.count = 0;
     info.curNum = 0;
-    info.enablePin = HAL_GPIO_INVALID;
-    info.ctrlPin = MOTOR1_CONTRL_PIN;
-    info.dirPin = MOTOR1_DIRECTION_PIN;
+    info.enablePin = HAL_MOTOR1_ENABLE_PIN;
+    info.ctrlPin = HAL_MOTOR1_CONTRL_PIN;
+    info.dirPin = HAL_MOTOR1_DIRECTION_PIN;
     HalPulseInfoInit(0, &info);
     g_motorNum++;
 
-    info.ctrlPin = MOTOR2_CONTRL_PIN;
-    info.dirPin = MOTOR2_DIRECTION_PIN;
+    info.enablePin = HAL_MOTOR2_ENABLE_PIN;
+    info.ctrlPin = HAL_MOTOR2_CONTRL_PIN;
+    info.dirPin = HAL_MOTOR2_DIRECTION_PIN;
     HalPulseInfoInit(1, &info);
     g_motorNum++;
 

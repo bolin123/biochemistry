@@ -264,6 +264,10 @@ uint8_t HalGetDevAddr(void)
 
 static HalUartRecv_cb g_uartRecvCb = NULL;
 
+/*
+* serial init function, baudrate 9600bps
+* @param[in] serial receive callback func.
+*/
 void HalUartInit(HalUartRecv_cb cb)
 {
     g_uartRecvCb = cb;

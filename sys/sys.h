@@ -9,9 +9,11 @@ typedef enum
     SYS_STATUS_BUSY,
 }SysStatus_t;
 
+//系统时间
 #define SysTime() HalSysTime()
 #define SysHasPassTime(oldTime, pass) (SysTime() - oldTime > pass)
 
+//系统事件
 #define SYS_EVENT_SELFCHECK 0x00
 #define SYS_EVENT_MOTOR_CONTRL 0x01
 

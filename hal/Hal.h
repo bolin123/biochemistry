@@ -4,8 +4,6 @@
 #include "motor.h"
 #include "HalConfig.h"
 
-#define HAL_GPIO_INVALID 0xff
-
 typedef struct
 {
     bool enable;        //使能位
@@ -24,18 +22,31 @@ void HalUartInit(HalUartRecv_cb cb);
 void HalUartSend(const uint8_t *dat, uint8_t len);
 
 void HalInit(void);
+
+//系统时钟
 uint32_t HalSysTime(void);
+
+//GPIO操作
 uint8_t HalGpioPinValueGet(uint8_t io);
 void HalGpioPinValueSet(uint8_t io, uint8_t val);
 
+//全局中断 true=使能，false=禁用
 void HalIRQEnableSet(bool enable);
 
+//电机控制脉冲相关操作
 int8_t HalPulseInfoInit(uint8_t index, HalPulseInfo_t *info);
 int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint8_t count, bool enable);
 HalPulseInfo_t *HalPulseInfoGet(uint8_t index);
+
+/*
+* 脉冲开始 
+* @period,脉冲周期(ms) 
+* @cb，电机旋转达到计数回调函数
+*/
 void HalPulseStart(uint32_t period, MotorStepOver_cb cb);
 void HalPulseStop(void);
 
+//获取硬件设备地址
 uint8_t HalGetDevAddr(void);
 
 #endif
