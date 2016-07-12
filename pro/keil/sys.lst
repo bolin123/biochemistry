@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   SYS                                                                   07/10/2016 22:14:08 PAGE 1   
+C51 COMPILER V9.00   SYS                                                                   07/12/2016 21:30:16 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE SYS
@@ -18,7 +18,7 @@ line level    source
    8          
    9          static bool sysMotor1SensorTriggered(void)
   10          {
-  11   1          if(HalGpioPinValueGet(0x00) == 0) //P00
+  11   1          if(HalGpioPinValueGet(HAL_MOTOR1_TRIGGER1_PIN) == 0) //P00
   12   1          {
   13   2              return true;
   14   2          }
@@ -27,7 +27,7 @@ line level    source
   17          
   18          static bool sysMotor2SensorTriggered(void)
   19          {
-  20   1          if(HalGpioPinValueGet(0x01))  //P01
+  20   1          if(HalGpioPinValueGet(HAL_MOTOR2_TRIGGER1_PIN))  //P01
   21   1          {
   22   2              return true;
   23   2          }
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1          if(doNextStep)
   54   1          {
-C51 COMPILER V9.00   SYS                                                                   07/10/2016 22:14:08 PAGE 2   
+C51 COMPILER V9.00   SYS                                                                   07/12/2016 21:30:16 PAGE 2   
 
   55   2              MotorStop(id);
   56   2              if(g_stepCount == 0)
@@ -126,7 +126,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V9.00   SYS                                                                   07/10/2016 22:14:08 PAGE 3   
+C51 COMPILER V9.00   SYS                                                                   07/12/2016 21:30:16 PAGE 3   
 
    CODE SIZE        =    326    ----
    CONSTANT SIZE    =   ----    ----

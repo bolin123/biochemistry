@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   MOTOR                                                                 07/10/2016 15:16:42 PAGE 1   
+C51 COMPILER V9.00   MOTOR                                                                 07/12/2016 21:53:59 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MOTOR
@@ -13,82 +13,78 @@ line level    source
    3          
    4          #define MOTOR_NUM 2 //控制电机总数
    5          
-   6          #define MOTOR1_CONTRL_PIN  0x27     //电机1控制管脚 p27
-   7          #define MOTOR1_DIRECTION_PIN 0x25   //电机1方向管脚 p17
-   8          #define MOTOR2_CONTRL_PIN  0x26     //电机2控制管脚 p26
-   9          #define MOTOR2_DIRECTION_PIN 0x24       //电机2方向管脚 p16
-  10          
-  11          static uint8_t g_motorNum = 0;
-  12          static MotorSensorTriggered g_sensorTriggered[MOTOR_NUM] = {0};
-  13          static MotorEventHandle g_eventCb = NULL;
+   6          static uint8_t g_motorNum = 0;
+   7          static MotorSensorTriggered g_sensorTriggered[MOTOR_NUM] = {0};
+   8          static MotorEventHandle g_eventCb = NULL;
+   9          
+  10          static void motorStepOverHandle(uint8_t id)
+  11          {
+  12   1          g_eventCb(id, MOTOR_EVENT_STEP_OVER);
+  13   1      }
   14          
-  15          static void motorStepOverHandle(uint8_t id)
+  15          void MotorInit(MotorEventHandle cb)
   16          {
-  17   1          g_eventCb(id, MOTOR_EVENT_STEP_OVER);
-  18   1      }
-  19          
-  20          void MotorInit(MotorEventHandle cb)
-  21          {
-  22   1          HalPulseInfo_t info;
-  23   1      
-  24   1          g_eventCb = cb;
-  25   1          //MOTOR_INDEX_NUM1
-  26   1          info.enable = false;
-  27   1          info.val = 0;
-  28   1          info.count = 0;
-  29   1          info.curNum = 0;
-  30   1          info.enablePin = HAL_GPIO_INVALID;
-  31   1          info.ctrlPin = MOTOR1_CONTRL_PIN;
-  32   1          info.dirPin = MOTOR1_DIRECTION_PIN;
-  33   1          HalPulseInfoInit(0, &info);
-  34   1          g_motorNum++;
-  35   1      
-  36   1          info.ctrlPin = MOTOR2_CONTRL_PIN;
-  37   1          info.dirPin = MOTOR2_DIRECTION_PIN;
-  38   1          HalPulseInfoInit(1, &info);
-  39   1          g_motorNum++;
-  40   1      
-  41   1          HalPulseStart(1, motorStepOverHandle);// 2ms
-  42   1      }
-  43          
-  44          void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb)
-  45          {
-  46   1          g_sensorTriggered[index] = cb;
-  47   1      }
-  48          
-  49          void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count)
-  50          {
-  51   1          HalIRQEnableSet(false);
-  52   1          HalPulseInfoSet(index, dir, count, true);
-  53   1          HalIRQEnableSet(true);
-  54   1      }
-C51 COMPILER V9.00   MOTOR                                                                 07/10/2016 15:16:42 PAGE 2   
+  17   1          HalPulseInfo_t info;
+  18   1      
+  19   1          g_eventCb = cb;
+  20   1          //MOTOR_INDEX_NUM1
+  21   1          info.enable = false;
+  22   1          info.val = 0;
+  23   1          info.count = 0;
+  24   1          info.curNum = 0;
+  25   1          info.enablePin = HAL_MOTOR1_ENABLE_PIN;
+  26   1          info.ctrlPin = HAL_MOTOR1_CONTRL_PIN;
+  27   1          info.dirPin = HAL_MOTOR1_DIRECTION_PIN;
+  28   1          HalPulseInfoInit(0, &info);
+  29   1          g_motorNum++;
+  30   1      
+  31   1          info.enablePin = HAL_MOTOR2_ENABLE_PIN;
+  32   1          info.ctrlPin = HAL_MOTOR2_CONTRL_PIN;
+  33   1          info.dirPin = HAL_MOTOR2_DIRECTION_PIN;
+  34   1          HalPulseInfoInit(1, &info);
+  35   1          g_motorNum++;
+  36   1      
+  37   1          HalPulseStart(1, motorStepOverHandle);// 2ms
+  38   1      }
+  39          
+  40          void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb)
+  41          {
+  42   1          g_sensorTriggered[index] = cb;
+  43   1      }
+  44          
+  45          void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count)
+  46          {
+  47   1          HalIRQEnableSet(false);
+  48   1          HalPulseInfoSet(index, dir, count, true);
+  49   1          HalIRQEnableSet(true);
+  50   1      }
+  51          
+  52          void MotorStop(uint8_t index)
+  53          {
+  54   1          HalIRQEnableSet(false);
+C51 COMPILER V9.00   MOTOR                                                                 07/12/2016 21:53:59 PAGE 2   
 
-  55          
-  56          void MotorStop(uint8_t index)
-  57          {
-  58   1          HalIRQEnableSet(false);
-  59   1          HalPulseInfoSet(index, 0, 0, false);
-  60   1          HalIRQEnableSet(true);
-  61   1      }
-  62          
-  63          void MotorPoll(void)
-  64          {
-  65   1          uint8_t i;
-  66   1      
-  67   1          for(i = 0; i < MOTOR_NUM; i++)
-  68   1          {
-  69   2              if(g_sensorTriggered[i] != NULL && g_sensorTriggered[i]())
-  70   2              {
-  71   3                  g_eventCb(i, MOTOR_EVENT_SENSOR_TRIGGERED);
-  72   3              }
-  73   2          }
-  74   1      }
-  75          
+  55   1          HalPulseInfoSet(index, 0, 0, false);
+  56   1          HalIRQEnableSet(true);
+  57   1      }
+  58          
+  59          void MotorPoll(void)
+  60          {
+  61   1          uint8_t i;
+  62   1      
+  63   1          for(i = 0; i < MOTOR_NUM; i++)
+  64   1          {
+  65   2              if(g_sensorTriggered[i] != NULL && g_sensorTriggered[i]())
+  66   2              {
+  67   3                  g_eventCb(i, MOTOR_EVENT_SENSOR_TRIGGERED);
+  68   3              }
+  69   2          }
+  70   1      }
+  71          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    268    ----
+   CODE SIZE        =    273    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =     10      13

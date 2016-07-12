@@ -8,7 +8,7 @@ static bool g_sysStatus = SYS_STATUS_IDLE;
 
 static bool sysMotor1SensorTriggered(void)
 {
-    if(HalGpioPinValueGet(0x00) == 0) //P00
+    if(HalGpioPinValueGet(HAL_MOTOR1_TRIGGER1_PIN) == 0) //P00
     {
         return true;
     }
@@ -17,7 +17,7 @@ static bool sysMotor1SensorTriggered(void)
 
 static bool sysMotor2SensorTriggered(void)
 {
-    if(HalGpioPinValueGet(0x01))  //P01
+    if(HalGpioPinValueGet(HAL_MOTOR2_TRIGGER1_PIN))  //P01
     {
         return true;
     }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   HAL                                                                   07/10/2016 15:16:07 PAGE 1   
+C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE HAL
@@ -62,7 +62,7 @@ line level    source
   52   3              }
   53   2              P2 = temp;
   54   2              break;
-C51 COMPILER V9.00   HAL                                                                   07/10/2016 15:16:07 PAGE 2   
+C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 2   
 
   55   2          case 3:
   56   2              temp = P3;
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1          uint8_t config = ((timer1 << 4) & 0xf0) + (timer0 & 0x0f);
  116   1          TMOD = config;
-C51 COMPILER V9.00   HAL                                                                   07/10/2016 15:16:07 PAGE 3   
+C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 3   
 
  117   1      }
  118          
@@ -190,7 +190,7 @@ line level    source
  176   3              }
  177   2              else
  178   2              {
-C51 COMPILER V9.00   HAL                                                                   07/10/2016 15:16:07 PAGE 4   
+C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 4   
 
  179   3                  HalGpioPinValueSet(g_pulseConfig[index].dirPin, HAL_MOTOR_BACKWARD_LEVEL); //backward
  180   3              }
@@ -254,7 +254,7 @@ line level    source
  238   3                  {
  239   4                      HalGpioPinValueSet(g_pulseConfig[i].ctrlPin, g_pulseConfig[i].val);
  240   4                      if(HAL_MOTOR_VALID_LEVEL == g_pulseConfig[i].val)
-C51 COMPILER V9.00   HAL                                                                   07/10/2016 15:16:07 PAGE 5   
+C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 5   
 
  241   4                      {
  242   5                          g_pulseConfig[i].curNum++;
@@ -282,54 +282,58 @@ line level    source
  264          
  265          static HalUartRecv_cb g_uartRecvCb = NULL;
  266          
- 267          void HalUartInit(HalUartRecv_cb cb)
- 268          {
- 269   1          g_uartRecvCb = cb;
- 270   1          HalIRQEnableSet(false);
- 271   1          SCON = 0x50;
- 272   1          T2CON = 0x34;
- 273   1          RCAP2H = 0xff;
- 274   1          RCAP2L = 0xdb;
- 275   1          TH2 = RCAP2H;
- 276   1          TL2 = RCAP2L;
- 277   1          ES = 1;
- 278   1          HalIRQEnableSet(true);
- 279   1      }
- 280          
- 281          void HalUartSend(const uint8_t *dat, uint8_t len)
- 282          {
- 283   1          uint8_t i;
- 284   1      
- 285   1          for(i = 0; i < len; i++)
- 286   1          {
- 287   2              TI = 0;
- 288   2              SBUF = dat[i];
- 289   2              while(TI == 0);
- 290   2              TI = 0;
- 291   2          }
- 292   1      }
- 293          
- 294          void uartIrq() interrupt 4
- 295          {
- 296   1          if(RI)
- 297   1          {
- 298   2              if(g_uartRecvCb != NULL)
- 299   2              {
- 300   3                  g_uartRecvCb(SBUF);
- 301   3              }
- 302   2              RI = 0;
-C51 COMPILER V9.00   HAL                                                                   07/10/2016 15:16:07 PAGE 6   
+ 267          /*
+ 268          * serial init function, baudrate 9600bps
+ 269          * @param[in] serial receive callback func.
+ 270          */
+ 271          void HalUartInit(HalUartRecv_cb cb)
+ 272          {
+ 273   1          g_uartRecvCb = cb;
+ 274   1          HalIRQEnableSet(false);
+ 275   1          SCON = 0x50;
+ 276   1          T2CON = 0x34;
+ 277   1          RCAP2H = 0xff;
+ 278   1          RCAP2L = 0xdb;
+ 279   1          TH2 = RCAP2H;
+ 280   1          TL2 = RCAP2L;
+ 281   1          ES = 1;
+ 282   1          HalIRQEnableSet(true);
+ 283   1      }
+ 284          
+ 285          void HalUartSend(const uint8_t *dat, uint8_t len)
+ 286          {
+ 287   1          uint8_t i;
+ 288   1      
+ 289   1          for(i = 0; i < len; i++)
+ 290   1          {
+ 291   2              TI = 0;
+ 292   2              SBUF = dat[i];
+ 293   2              while(TI == 0);
+ 294   2              TI = 0;
+ 295   2          }
+ 296   1      }
+ 297          
+ 298          void uartIrq() interrupt 4
+ 299          {
+ 300   1          if(RI)
+ 301   1          {
+ 302   2              if(g_uartRecvCb != NULL)
+C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 6   
 
- 303   2          }
- 304   1      }
- 305          
- 306          void HalInit(void)
- 307          {
- 308   1          timerModeConfig(1, 1);
- 309   1          sysTimerInit();
- 310   1          HalIRQEnableSet(true);
- 311   1      }
- 312          
+ 303   2              {
+ 304   3                  g_uartRecvCb(SBUF);
+ 305   3              }
+ 306   2              RI = 0;
+ 307   2          }
+ 308   1      }
+ 309          
+ 310          void HalInit(void)
+ 311          {
+ 312   1          timerModeConfig(1, 1);
+ 313   1          sysTimerInit();
+ 314   1          HalIRQEnableSet(true);
+ 315   1      }
+ 316          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
