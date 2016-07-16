@@ -18,12 +18,15 @@ typedef struct
 } MProtoHead_t;
 
 //电机步骤
+#pragma pack(1)
 typedef struct
 {
     uint8_t id;
-    uint8_t dir;
+    uint8_t dir:4;
+    uint8_t flag:4;
     uint16_t count;
 } MProtoStep_t;
+#pragma pack()
 
 typedef struct
 {
@@ -37,6 +40,7 @@ typedef enum
     MPROTO_RESULT_SUCCESS = 0, //成功
     MPROTO_RESULT_CMD_VALID,   //指令无效
     MPROTO_RESULT_BUSY,        //设备忙
+    MPROTO_RESULT_SENOR_ERROR, //传感器故障
 }MProtoResult_t;
 
 #define MPROTO_CMD_BROADCAST 0x00  //广播

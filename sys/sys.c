@@ -41,10 +41,14 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
     if(MOTOR_EVENT_STEP_OVER == event)
     {
         doNextStep = true;
+        if(g_curStepInfo->flag == 1) 
+        {
+            MProtoCtrlResult(MPROTO_RESULT_SENOR_ERROR); //´«¸ÐÆ÷Î´´¥·¢
+        }
     }
     else if(MOTOR_EVENT_SENSOR_TRIGGERED == event)
     {
-        if(g_curStepInfo != NULL && g_curStepInfo->count == 0)
+        if(g_curStepInfo != NULL && g_curStepInfo->flag == 1)
         {
             doNextStep = true;
         }

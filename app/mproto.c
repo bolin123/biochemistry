@@ -72,10 +72,14 @@ static void controlOpt(uint8_t *contents)
     {
         for(n = 0, j = 0; n < g_steps.count; n++)
         {
+        #if 0
             g_steps.step[n].id = steps[j++];
             g_steps.step[n].dir = steps[j++];
             g_steps.step[n].count = steps[j++];
             g_steps.step[n].count = (g_steps.step[n].count << 8) + steps[j++];
+        #endif
+            memcpy(&g_steps.step[n], &steps[j], sizeof(MProtoStep_t));
+            j += sizeof(MProtoStep_t);
         }
         g_sysEventCb(SYS_EVENT_MOTOR_CONTRL, (void *)&g_steps);
     }
