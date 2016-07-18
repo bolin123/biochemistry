@@ -34,7 +34,7 @@ void MotorInit(MotorEventHandle cb)
     HalPulseInfoInit(1, &info);
     g_motorNum++;
 
-    HalPulseStart(1, motorStepOverHandle);// 2ms
+    HalPulseStart(HAL_MOTOR_CYCLE_TIME, motorStepOverHandle);// 2ms
 }
 
 void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb)
@@ -42,7 +42,7 @@ void MotorTriggeredRegister(uint8_t index, MotorSensorTriggered cb)
     g_sensorTriggered[index] = cb;
 }
 
-void MotorStart(uint8_t index, MotorDirection_t dir, uint8_t count)
+void MotorStart(uint8_t index, MotorDirection_t dir, uint16_t count)
 {
     HalIRQEnableSet(false);
     HalPulseInfoSet(index, dir, count, true);

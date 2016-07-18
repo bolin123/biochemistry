@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   MPROTO                                                                07/12/2016 21:30:15 PAGE 1   
+C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MPROTO
@@ -62,7 +62,7 @@ line level    source
   52          void MProtoCtrlResult(MProtoResult_t result)
   53          {
   54   1          uint8_t dat[2];
-C51 COMPILER V9.00   MPROTO                                                                07/12/2016 21:30:15 PAGE 2   
+C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 2   
 
   55   1          dat[0] = g_controlIndex;
   56   1          dat[1] = result;
@@ -84,145 +84,151 @@ line level    source
   72   1          {
   73   2              for(n = 0, j = 0; n < g_steps.count; n++)
   74   2              {
-  75   3                  g_steps.step[n].id = steps[j++];
-  76   3                  g_steps.step[n].dir = steps[j++];
-  77   3                  g_steps.step[n].count = steps[j++];
-  78   3                  g_steps.step[n].count = (g_steps.step[n].count << 8) + steps[j++];
-  79   3              }
-  80   2              g_sysEventCb(SYS_EVENT_MOTOR_CONTRL, (void *)&g_steps);
-  81   2          }
-  82   1          else
-  83   1          {
-  84   2              MProtoCtrlResult(MPROTO_RESULT_CMD_VALID);
-  85   2          }
-  86   1      
-  87   1      }
-  88          
-  89          static void mprotoRecv(uint8_t byte)
-  90          {
-  91   1          static uint8_t frameDataLen = 0;
+  75   3              #if 0
+                          g_steps.step[n].id = steps[j++];
+                          g_steps.step[n].dir = steps[j++];
+                          g_steps.step[n].flag = steps[j++];
+                          g_steps.step[n].cycle[0] = steps[j++];
+                          g_steps.step[n].cycle[1] = steps[j++];
+                          //g_steps.step[n].count = (g_steps.step[n].count << 8) + steps[j++];
+                      #endif
+  83   3                  memcpy(&g_steps.step[n], &steps[j], sizeof(MProtoStep_t));
+  84   3                  j += sizeof(MProtoStep_t);
+  85   3              }
+  86   2              g_sysEventCb(SYS_EVENT_MOTOR_CONTRL, (void *)&g_steps);
+  87   2          }
+  88   1          else
+  89   1          {
+  90   2              MProtoCtrlResult(MPROTO_RESULT_CMD_VALID);
+  91   2          }
   92   1      
-  93   1          if(g_frameDataCount >= MPROTO_FRAME_BUFFER_LEN)
-  94   1          {
-  95   2              g_frameDataCount = 0;
-  96   2          }
-  97   1          g_frameBuffer[g_frameDataCount++] = byte;
+  93   1      }
+  94          
+  95          static void mprotoRecv(uint8_t byte)
+  96          {
+  97   1          static uint8_t frameDataLen = 0;
   98   1      
-  99   1          switch(g_frameDataCount)
+  99   1          if(g_frameDataCount >= MPROTO_FRAME_BUFFER_LEN)
  100   1          {
- 101   2          case 1:
- 102   2              if(byte != MPROTO_FRAME_PREAMBLE)
- 103   2              {
- 104   3                  g_frameDataCount = 0;
- 105   3              }
- 106   2              break;
- 107   2          case 2:
- 108   2              if(byte != SysGetDevAddr() && byte != 0xff)
+ 101   2              g_frameDataCount = 0;
+ 102   2          }
+ 103   1          g_frameBuffer[g_frameDataCount++] = byte;
+ 104   1      
+ 105   1          switch(g_frameDataCount)
+ 106   1          {
+ 107   2          case 1:
+ 108   2              if(byte != MPROTO_FRAME_PREAMBLE)
  109   2              {
  110   3                  g_frameDataCount = 0;
  111   3              }
  112   2              break;
- 113   2          case 3:
- 114   2              if(byte > (MPROTO_FRAME_BUFFER_LEN - sizeof(MProtoHead_t)))
+ 113   2          case 2:
+ 114   2              if(byte != SysGetDevAddr() && byte != 0xff)
  115   2              {
  116   3                  g_frameDataCount = 0;
-C51 COMPILER V9.00   MPROTO                                                                07/12/2016 21:30:15 PAGE 3   
+C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 3   
 
  117   3              }
- 118   2              else
- 119   2              {
- 120   3                  frameDataLen = byte;
- 121   3              }
- 122   2              break;
- 123   2          default:
- 124   2              if(g_frameDataCount == (sizeof(MProtoHead_t) + frameDataLen + 1))
+ 118   2              break;
+ 119   2          case 3:
+ 120   2              if(byte > (MPROTO_FRAME_BUFFER_LEN - sizeof(MProtoHead_t)))
+ 121   2              {
+ 122   3                  g_frameDataCount = 0;
+ 123   3              }
+ 124   2              else
  125   2              {
- 126   3                  if(byte == checkFrame(g_frameBuffer, sizeof(MProtoHead_t) + frameDataLen))
- 127   3                  {
- 128   4                      g_frameRecved = true;
- 129   4                  }
- 130   3                  g_frameDataCount = 0;
- 131   3              }
- 132   2              break;
- 133   2          }
- 134   1      }
- 135          
- 136          static void mprotoPrase(void)
- 137          {
- 138   1          MProtoHead_t *mproto;
- 139   1          uint8_t cmd;
- 140   1          uint8_t *content = NULL;
- 141   1      
- 142   1          if(g_frameRecved)
- 143   1          {
- 144   2              mproto = (MProtoHead_t *)g_frameBuffer;
- 145   2      
- 146   2              if(mproto->cmd & 0x80) //need ack
- 147   2              {
- 148   3                  MprotoSend(MPROTO_CMD_ACK, NULL, 0, mproto->sn, false);
- 149   3              }
- 150   2              cmd = mproto->cmd & 0x7f;
- 151   2              switch(cmd)
- 152   2              {
- 153   3              case MPROTO_CMD_BROADCAST:
- 154   3                  g_broadcastTime = SysTime();
- 155   3                  g_broadcastFlag = true;
- 156   3                  break;
- 157   3              case MPROTO_CMD_SELF_CHECK:
- 158   3                  g_sysEventCb(SYS_EVENT_SELFCHECK, NULL);
- 159   3                  break;
- 160   3              case MPROTO_CMD_MOTOR_CTRL:
- 161   3                  content = (uint8_t *)mproto + sizeof(MProtoHead_t);
- 162   3                  if(SysGetStatus() == SYS_STATUS_IDLE)
- 163   3                  {
- 164   4                      controlOpt(content);
- 165   4                  }
- 166   3                  else
- 167   3                  {
- 168   4                      MProtoCtrlResult(MPROTO_RESULT_BUSY);
- 169   4                  }
- 170   3                  break;
- 171   3              case MPROTO_CMD_QUERY:
- 172   3                  break;
- 173   3              default:
- 174   3                  break;
- 175   3              }
- 176   2              g_frameRecved = false;
- 177   2          }
- 178   1      }
-C51 COMPILER V9.00   MPROTO                                                                07/12/2016 21:30:15 PAGE 4   
+ 126   3                  frameDataLen = byte;
+ 127   3              }
+ 128   2              break;
+ 129   2          default:
+ 130   2              if(g_frameDataCount == (sizeof(MProtoHead_t) + frameDataLen + 1))
+ 131   2              {
+ 132   3                  if(byte == checkFrame(g_frameBuffer, sizeof(MProtoHead_t) + frameDataLen))
+ 133   3                  {
+ 134   4                      g_frameRecved = true;
+ 135   4                  }
+ 136   3                  g_frameDataCount = 0;
+ 137   3              }
+ 138   2              break;
+ 139   2          }
+ 140   1      }
+ 141          
+ 142          static void mprotoPrase(void)
+ 143          {
+ 144   1          MProtoHead_t *mproto;
+ 145   1          uint8_t cmd;
+ 146   1          uint8_t *content = NULL;
+ 147   1      
+ 148   1          if(g_frameRecved)
+ 149   1          {
+ 150   2              mproto = (MProtoHead_t *)g_frameBuffer;
+ 151   2      
+ 152   2              if(mproto->cmd & 0x80) //need ack
+ 153   2              {
+ 154   3                  MprotoSend(MPROTO_CMD_ACK, NULL, 0, mproto->sn, false);
+ 155   3              }
+ 156   2              cmd = mproto->cmd & 0x7f;
+ 157   2              switch(cmd)
+ 158   2              {
+ 159   3              case MPROTO_CMD_BROADCAST:
+ 160   3                  g_broadcastTime = SysTime();
+ 161   3                  g_broadcastFlag = true;
+ 162   3                  break;
+ 163   3              case MPROTO_CMD_SELF_CHECK:
+ 164   3                  g_sysEventCb(SYS_EVENT_SELFCHECK, NULL);
+ 165   3                  break;
+ 166   3              case MPROTO_CMD_MOTOR_CTRL:
+ 167   3                  content = (uint8_t *)mproto + sizeof(MProtoHead_t);
+ 168   3                  if(SysGetStatus() == SYS_STATUS_IDLE)
+ 169   3                  {
+ 170   4                      controlOpt(content);
+ 171   4                  }
+ 172   3                  else
+ 173   3                  {
+ 174   4                      MProtoCtrlResult(MPROTO_RESULT_BUSY);
+ 175   4                  }
+ 176   3                  break;
+ 177   3              case MPROTO_CMD_QUERY:
+ 178   3                  break;
+C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 4   
 
- 179          
- 180          static void broadcastAck(void)
- 181          {
- 182   1          uint8_t addr;
- 183   1          if(g_broadcastFlag && SysHasPassTime(g_broadcastTime, SysGetDevAddr() * 1000))
- 184   1          {
- 185   2              addr = SysGetDevAddr();
- 186   2              MprotoSend(MPROTO_CMD_BROADCAST, &addr, 1, g_msgIndex++, false);
- 187   2              g_broadcastFlag = false;
- 188   2          }
- 189   1      }
- 190          
- 191          void MProtoInit(SysEvent_cb cb)
- 192          {
- 193   1          g_sysEventCb = cb;
- 194   1          HalUartInit(mprotoRecv);
+ 179   3              default:
+ 180   3                  break;
+ 181   3              }
+ 182   2              g_frameRecved = false;
+ 183   2          }
+ 184   1      }
+ 185          
+ 186          static void broadcastAck(void)
+ 187          {
+ 188   1          uint8_t addr;
+ 189   1          if(g_broadcastFlag && SysHasPassTime(g_broadcastTime, SysGetDevAddr() * 1000))
+ 190   1          {
+ 191   2              addr = SysGetDevAddr();
+ 192   2              MprotoSend(MPROTO_CMD_BROADCAST, &addr, 1, g_msgIndex++, false);
+ 193   2              g_broadcastFlag = false;
+ 194   2          }
  195   1      }
  196          
- 197          void MProtoPoll(void)
+ 197          void MProtoInit(SysEvent_cb cb)
  198          {
- 199   1          mprotoPrase();
- 200   1          broadcastAck();
+ 199   1          g_sysEventCb = cb;
+ 200   1          HalUartInit(mprotoRecv);
  201   1      }
  202          
+ 203          void MProtoPoll(void)
+ 204          {
+ 205   1          mprotoPrase();
+ 206   1          broadcastAck();
+ 207   1      }
+ 208          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    964    ----
+   CODE SIZE        =    868    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-   PDATA SIZE       =    116      94
+   PDATA SIZE       =    106      94
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 1   
+C51 COMPILER V9.00   HAL                                                                   07/18/2016 22:42:55 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE HAL
@@ -62,7 +62,7 @@ line level    source
   52   3              }
   53   2              P2 = temp;
   54   2              break;
-C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 2   
+C51 COMPILER V9.00   HAL                                                                   07/18/2016 22:42:55 PAGE 2   
 
   55   2          case 3:
   56   2              temp = P3;
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1          uint8_t config = ((timer1 << 4) & 0xf0) + (timer0 & 0x0f);
  116   1          TMOD = config;
-C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 3   
+C51 COMPILER V9.00   HAL                                                                   07/18/2016 22:42:55 PAGE 3   
 
  117   1      }
  118          
@@ -162,185 +162,186 @@ line level    source
  148   2              return -1;
  149   2          }
  150   1          g_pulseConfig[index] = *info;
- 151   1          return 0;
- 152   1      }
- 153          
- 154          HalPulseInfo_t *HalPulseInfoGet(uint8_t index)
- 155          {
- 156   1          return &g_pulseConfig[index];
- 157   1      }
- 158          
- 159          int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint8_t count, bool enable)
- 160          {
- 161   1          if(index >= HAL_PULSE_INFO_NUM)
- 162   1          {
- 163   2              return -1;
- 164   2          }
- 165   1          g_pulseConfig[index].enable = enable;
- 166   1          g_pulseConfig[index].val = HAL_MOTOR_CLK_DISABLE_LEVEL; //disable
- 167   1          g_pulseConfig[index].count = count;
- 168   1          g_pulseConfig[index].curNum = 0;
- 169   1          g_pulseConfig[index].dir = dir;
- 170   1          //  g_pulseConfig[index].cb = cb;
- 171   1          if(enable)
- 172   1          {
- 173   2              if(dir == MOTOR_DIR_FORWARD)
- 174   2              {
- 175   3                  HalGpioPinValueSet(g_pulseConfig[index].dirPin, HAL_MOTOR_FORWARD_LEVEL); //forward
- 176   3              }
- 177   2              else
- 178   2              {
-C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 4   
+ 151   1          HalGpioPinValueSet(info->enablePin, HAL_MOTOR_DISABLE_LEVEL);
+ 152   1          return 0;
+ 153   1      }
+ 154          
+ 155          HalPulseInfo_t *HalPulseInfoGet(uint8_t index)
+ 156          {
+ 157   1          return &g_pulseConfig[index];
+ 158   1      }
+ 159          
+ 160          int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint16_t count, bool enable)
+ 161          {
+ 162   1          if(index >= HAL_PULSE_INFO_NUM)
+ 163   1          {
+ 164   2              return -1;
+ 165   2          }
+ 166   1          g_pulseConfig[index].enable = enable;
+ 167   1          g_pulseConfig[index].val = HAL_MOTOR_CLK_DISABLE_LEVEL; //disable
+ 168   1          g_pulseConfig[index].count = count;
+ 169   1          g_pulseConfig[index].curNum = 0;
+ 170   1          g_pulseConfig[index].dir = dir;
+ 171   1          //  g_pulseConfig[index].cb = cb;
+ 172   1          if(enable)
+ 173   1          {
+ 174   2              if(dir == MOTOR_DIR_FORWARD)
+ 175   2              {
+ 176   3                  HalGpioPinValueSet(g_pulseConfig[index].dirPin, HAL_MOTOR_FORWARD_LEVEL); //forward
+ 177   3              }
+ 178   2              else
+C51 COMPILER V9.00   HAL                                                                   07/18/2016 22:42:55 PAGE 4   
 
- 179   3                  HalGpioPinValueSet(g_pulseConfig[index].dirPin, HAL_MOTOR_BACKWARD_LEVEL); //backward
- 180   3              }
- 181   2              if(g_pulseConfig[index].enablePin != HAL_GPIO_INVALID)
- 182   2              {
- 183   3                  HalGpioPinValueSet(g_pulseConfig[index].enablePin, HAL_MOTOR_ENABLE_LEVEL);
- 184   3              }
- 185   2          }
- 186   1          else
- 187   1          {
- 188   2              if(g_pulseConfig[index].enablePin != HAL_GPIO_INVALID)
- 189   2              {
- 190   3                  HalGpioPinValueSet(g_pulseConfig[index].enablePin, HAL_MOTOR_DISABLE_LEVEL);
- 191   3              }
- 192   2          }
- 193   1          return 0;
- 194   1      }
- 195          
- 196          /*
- 197                  period: x ms
- 198          */
- 199          
- 200          void HalPulseStart(uint32_t period, MotorStepOver_cb cb)
- 201          {
- 202   1          float count = 11059200 / 12 / (period * 1000);
- 203   1          uint32_t timeCount = (uint32_t)count;
- 204   1      
- 205   1          g_pluseStepOverCb = cb;
- 206   1      
- 207   1          g_pulseCount[1] = (0xffff - timeCount) / 0xff;
- 208   1          g_pulseCount[0] = (0xffff - timeCount) % 0xff;
- 209   1          TH1  = g_pulseCount[1];
- 210   1          TL1  = g_pulseCount[0];
- 211   1          TR1 = 1; //enable timer 1
- 212   1          ET1 = 1; //irq enable
- 213   1      }
- 214          
- 215          void HalPulseStop(void)
- 216          {
- 217   1          ET1 = 0;
- 218   1          TR1 = 0;
- 219   1      }
- 220          
- 221          #define HAL_MOTOR_VALID_LEVEL 0x0
- 222          
- 223          void Time1_Int() interrupt 3
- 224          {
- 225   1          uint8_t i;
- 226   1          for(i = 0; i < HAL_PULSE_INFO_NUM; i++)
- 227   1          {
- 228   2              if(g_pulseConfig[i].enable)
- 229   2              {
- 230   3                  if(g_pulseConfig[i].count != 0 && g_pulseConfig[i].curNum >= g_pulseConfig[i].count)
- 231   3                  {
- 232   4                      if(g_pluseStepOverCb != NULL)
- 233   4                      {
- 234   5                          g_pluseStepOverCb(i);
- 235   5                      }
- 236   4                  }
- 237   3                  else
- 238   3                  {
- 239   4                      HalGpioPinValueSet(g_pulseConfig[i].ctrlPin, g_pulseConfig[i].val);
- 240   4                      if(HAL_MOTOR_VALID_LEVEL == g_pulseConfig[i].val)
-C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 5   
+ 179   2              {
+ 180   3                  HalGpioPinValueSet(g_pulseConfig[index].dirPin, HAL_MOTOR_BACKWARD_LEVEL); //backward
+ 181   3              }
+ 182   2              if(g_pulseConfig[index].enablePin != HAL_GPIO_INVALID)
+ 183   2              {
+ 184   3                  HalGpioPinValueSet(g_pulseConfig[index].enablePin, HAL_MOTOR_ENABLE_LEVEL);
+ 185   3              }
+ 186   2          }
+ 187   1          else
+ 188   1          {
+ 189   2              if(g_pulseConfig[index].enablePin != HAL_GPIO_INVALID)
+ 190   2              {
+ 191   3                  HalGpioPinValueSet(g_pulseConfig[index].enablePin, HAL_MOTOR_DISABLE_LEVEL);
+ 192   3              }
+ 193   2          }
+ 194   1          return 0;
+ 195   1      }
+ 196          
+ 197          /*
+ 198                  period: x ms
+ 199          */
+ 200          
+ 201          void HalPulseStart(uint32_t period, MotorStepOver_cb cb)
+ 202          {
+ 203   1          float count = 11059200 / 12 / (period * 1000);
+ 204   1          uint32_t timeCount = (uint32_t)count;
+ 205   1      
+ 206   1          g_pluseStepOverCb = cb;
+ 207   1      
+ 208   1          g_pulseCount[1] = (0xffff - timeCount) / 0xff;
+ 209   1          g_pulseCount[0] = (0xffff - timeCount) % 0xff;
+ 210   1          TH1  = g_pulseCount[1];
+ 211   1          TL1  = g_pulseCount[0];
+ 212   1          TR1 = 1; //enable timer 1
+ 213   1          ET1 = 1; //irq enable
+ 214   1      }
+ 215          
+ 216          void HalPulseStop(void)
+ 217          {
+ 218   1          ET1 = 0;
+ 219   1          TR1 = 0;
+ 220   1      }
+ 221          
+ 222          #define HAL_MOTOR_VALID_LEVEL 0x0
+ 223          
+ 224          void Time1_Int() interrupt 3
+ 225          {
+ 226   1          uint8_t i;
+ 227   1          for(i = 0; i < HAL_PULSE_INFO_NUM; i++)
+ 228   1          {
+ 229   2              if(g_pulseConfig[i].enable)
+ 230   2              {
+ 231   3                  if(g_pulseConfig[i].count != 0 && g_pulseConfig[i].curNum >= g_pulseConfig[i].count)
+ 232   3                  {
+ 233   4                      if(g_pluseStepOverCb != NULL)
+ 234   4                      {
+ 235   5                          g_pluseStepOverCb(i);
+ 236   5                      }
+ 237   4                  }
+ 238   3                  else
+ 239   3                  {
+ 240   4                      HalGpioPinValueSet(g_pulseConfig[i].ctrlPin, g_pulseConfig[i].val);
+C51 COMPILER V9.00   HAL                                                                   07/18/2016 22:42:55 PAGE 5   
 
- 241   4                      {
- 242   5                          g_pulseConfig[i].curNum++;
- 243   5                      }
- 244   4                      g_pulseConfig[i].val = !g_pulseConfig[i].val;
- 245   4                  }
- 246   3              }
- 247   2          }
- 248   1          TH1  = g_pulseCount[1];
- 249   1          TL1  = g_pulseCount[0];
- 250   1      }
- 251          
- 252          uint8_t HalGetDevAddr(void)
- 253          {
- 254   1      #if HAL_USE_HARDWARE_ADDR
+ 241   4                      if(HAL_MOTOR_VALID_LEVEL == g_pulseConfig[i].val)
+ 242   4                      {
+ 243   5                          g_pulseConfig[i].curNum++;
+ 244   5                      }
+ 245   4                      g_pulseConfig[i].val = !g_pulseConfig[i].val;
+ 246   4                  }
+ 247   3              }
+ 248   2          }
+ 249   1          TH1  = g_pulseCount[1];
+ 250   1          TL1  = g_pulseCount[0];
+ 251   1      }
+ 252          
+ 253          uint8_t HalGetDevAddr(void)
+ 254          {
+ 255   1      #if HAL_USE_HARDWARE_ADDR
                   uint8_t addr = 0;
                   addr |= HalGpioPinValueGet(HAL_ADDR2_PIN) << 2;
                   addr |= HalGpioPinValueGet(HAL_ADDR1_PIN) << 1;
                   addr |= HalGpioPinValueGet(HAL_ADDR0_PIN);
                   return addr;
               #else
- 261   1          return HAL_SOFTWARE_ADDR;
- 262   1      #endif
- 263   1      }
- 264          
- 265          static HalUartRecv_cb g_uartRecvCb = NULL;
- 266          
- 267          /*
- 268          * serial init function, baudrate 9600bps
- 269          * @param[in] serial receive callback func.
- 270          */
- 271          void HalUartInit(HalUartRecv_cb cb)
- 272          {
- 273   1          g_uartRecvCb = cb;
- 274   1          HalIRQEnableSet(false);
- 275   1          SCON = 0x50;
- 276   1          T2CON = 0x34;
- 277   1          RCAP2H = 0xff;
- 278   1          RCAP2L = 0xdb;
- 279   1          TH2 = RCAP2H;
- 280   1          TL2 = RCAP2L;
- 281   1          ES = 1;
- 282   1          HalIRQEnableSet(true);
- 283   1      }
- 284          
- 285          void HalUartSend(const uint8_t *dat, uint8_t len)
- 286          {
- 287   1          uint8_t i;
- 288   1      
- 289   1          for(i = 0; i < len; i++)
- 290   1          {
- 291   2              TI = 0;
- 292   2              SBUF = dat[i];
- 293   2              while(TI == 0);
- 294   2              TI = 0;
- 295   2          }
- 296   1      }
- 297          
- 298          void uartIrq() interrupt 4
- 299          {
- 300   1          if(RI)
- 301   1          {
- 302   2              if(g_uartRecvCb != NULL)
-C51 COMPILER V9.00   HAL                                                                   07/12/2016 21:46:31 PAGE 6   
+ 262   1          return HAL_SOFTWARE_ADDR;
+ 263   1      #endif
+ 264   1      }
+ 265          
+ 266          static HalUartRecv_cb g_uartRecvCb = NULL;
+ 267          
+ 268          /*
+ 269          * serial init function, baudrate 9600bps
+ 270          * @param[in] serial receive callback func.
+ 271          */
+ 272          void HalUartInit(HalUartRecv_cb cb)
+ 273          {
+ 274   1          g_uartRecvCb = cb;
+ 275   1          HalIRQEnableSet(false);
+ 276   1          SCON = 0x50;
+ 277   1          T2CON = 0x34;
+ 278   1          RCAP2H = 0xff;
+ 279   1          RCAP2L = 0xdb;
+ 280   1          TH2 = RCAP2H;
+ 281   1          TL2 = RCAP2L;
+ 282   1          ES = 1;
+ 283   1          HalIRQEnableSet(true);
+ 284   1      }
+ 285          
+ 286          void HalUartSend(const uint8_t *dat, uint8_t len)
+ 287          {
+ 288   1          uint8_t i;
+ 289   1      
+ 290   1          for(i = 0; i < len; i++)
+ 291   1          {
+ 292   2              TI = 0;
+ 293   2              SBUF = dat[i];
+ 294   2              while(TI == 0);
+ 295   2              TI = 0;
+ 296   2          }
+ 297   1      }
+ 298          
+ 299          void uartIrq() interrupt 4
+ 300          {
+ 301   1          if(RI)
+ 302   1          {
+C51 COMPILER V9.00   HAL                                                                   07/18/2016 22:42:55 PAGE 6   
 
- 303   2              {
- 304   3                  g_uartRecvCb(SBUF);
- 305   3              }
- 306   2              RI = 0;
- 307   2          }
- 308   1      }
- 309          
- 310          void HalInit(void)
- 311          {
- 312   1          timerModeConfig(1, 1);
- 313   1          sysTimerInit();
- 314   1          HalIRQEnableSet(true);
- 315   1      }
- 316          
+ 303   2              if(g_uartRecvCb != NULL)
+ 304   2              {
+ 305   3                  g_uartRecvCb(SBUF);
+ 306   3              }
+ 307   2              RI = 0;
+ 308   2          }
+ 309   1      }
+ 310          
+ 311          void HalInit(void)
+ 312          {
+ 313   1          timerModeConfig(1, 1);
+ 314   1          sysTimerInit();
+ 315   1          HalIRQEnableSet(true);
+ 316   1      }
+ 317          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1144    ----
+   CODE SIZE        =   1206    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-   PDATA SIZE       =     26      13
+   PDATA SIZE       =     30      17
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

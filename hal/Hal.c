@@ -148,6 +148,7 @@ int8_t HalPulseInfoInit(uint8_t index, HalPulseInfo_t *info)
         return -1;
     }
     g_pulseConfig[index] = *info;
+    HalGpioPinValueSet(info->enablePin, HAL_MOTOR_DISABLE_LEVEL);
     return 0;
 }
 
@@ -156,7 +157,7 @@ HalPulseInfo_t *HalPulseInfoGet(uint8_t index)
     return &g_pulseConfig[index];
 }
 
-int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint8_t count, bool enable)
+int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint16_t count, bool enable)
 {
     if(index >= HAL_PULSE_INFO_NUM)
     {

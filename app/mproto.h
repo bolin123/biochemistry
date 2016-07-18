@@ -4,7 +4,7 @@
 #include "Sys.h"
 
 //电机操作最大步骤数
-#define MPROTO_MAX_STEPS_COUNT 10
+#define MPROTO_MAX_STEPS_COUNT 6
 
 //协议头
 typedef struct
@@ -18,15 +18,13 @@ typedef struct
 } MProtoHead_t;
 
 //电机步骤
-#pragma pack(1)
 typedef struct
 {
     uint8_t id;
-    uint8_t dir:4;
-    uint8_t flag:4;
-    uint16_t count;
-} MProtoStep_t;
-#pragma pack()
+    uint8_t dir;
+    uint8_t flag;
+    uint16_t cycle;
+}MProtoStep_t;
 
 typedef struct
 {

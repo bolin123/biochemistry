@@ -174,7 +174,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>8</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>138</TopLine>
       <CurrentLine>138</CurrentLine>
@@ -223,7 +223,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>33</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>21</TopLine>
       <CurrentLine>30</CurrentLine>
@@ -242,12 +242,12 @@
       <GroupNumber>3</GroupNumber>
       <FileNumber>6</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>50</TopLine>
-      <CurrentLine>57</CurrentLine>
+      <TopLine>83</TopLine>
+      <CurrentLine>105</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\sys\sys.c</PathWithFileName>
       <FilenameWithoutPath>sys.c</FilenameWithoutPath>
@@ -282,8 +282,8 @@
 
   <AlienFiles>
     <PathWithFilename>C:\工作相关\全自动生化仪\software\biochemistry\APP\MPROTO.H</PathWithFilename>
-    <TopLine>22</TopLine>
-    <CurrentLine>29</CurrentLine>
+    <TopLine>14</TopLine>
+    <CurrentLine>35</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1673,17 +1673,17 @@
     <ActiveMDIGroup>0</ActiveMDIGroup>
     <MDIGroup>
       <Size>100</Size>
-      <ActiveTab>4</ActiveTab>
+      <ActiveTab>0</ActiveTab>
       <Documents>
         <Doc>
           <Name>..\..\sys\sys.c</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>50</TopLine>
-          <CurrentLine>57</CurrentLine>
+          <TopLine>83</TopLine>
+          <CurrentLine>105</CurrentLine>
         </Doc>
         <Doc>
           <Name>..\..\hal\Hal.c</Name>
-          <ColumnNumber>8</ColumnNumber>
+          <ColumnNumber>0</ColumnNumber>
           <TopLine>138</TopLine>
           <CurrentLine>138</CurrentLine>
         </Doc>
@@ -1701,15 +1701,15 @@
         </Doc>
         <Doc>
           <Name>..\..\app\mproto.c</Name>
-          <ColumnNumber>33</ColumnNumber>
+          <ColumnNumber>0</ColumnNumber>
           <TopLine>21</TopLine>
           <CurrentLine>30</CurrentLine>
         </Doc>
         <Doc>
           <Name>..\..\APP\MPROTO.H</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>22</TopLine>
-          <CurrentLine>29</CurrentLine>
+          <TopLine>14</TopLine>
+          <CurrentLine>35</CurrentLine>
         </Doc>
         <Doc>
           <Name>..\..\SYS\SYS.H</Name>

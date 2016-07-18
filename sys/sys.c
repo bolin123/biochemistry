@@ -8,7 +8,7 @@ static bool g_sysStatus = SYS_STATUS_IDLE;
 
 static bool sysMotor1SensorTriggered(void)
 {
-    if(HalGpioPinValueGet(HAL_MOTOR1_TRIGGER1_PIN) == 0) //P00
+    if(HalGpioPinValueGet(HAL_MOTOR1_TRIGGER1_PIN)) //P00
     {
         return true;
     }
@@ -17,7 +17,7 @@ static bool sysMotor1SensorTriggered(void)
 
 static bool sysMotor2SensorTriggered(void)
 {
-    if(HalGpioPinValueGet(HAL_MOTOR2_TRIGGER1_PIN))  //P01
+    if(!HalGpioPinValueGet(HAL_MOTOR2_TRIGGER1_PIN))  //P01
     {
         return true;
     }
@@ -29,9 +29,6 @@ static void sysMotorInit(void)
 {
     MotorTriggeredRegister(0, sysMotor1SensorTriggered);
     MotorTriggeredRegister(1, sysMotor2SensorTriggered);
-    //MotorStart(0, MOTOR_DIR_BACKWARD, 0, NULL);
-    //MotorStart(1, MOTOR_DIR_BACKWARD, 0, NULL);
-    //MotorStart(1, MOTOR_DIR_BACKWARD, 50, testMotorCb);
 }
 
 static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
@@ -48,7 +45,9 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
     }
     else if(MOTOR_EVENT_SENSOR_TRIGGERED == event)
     {
-        if(g_curStepInfo != NULL && g_curStepInfo->flag == 1)
+        if(g_curStepInfo != NULL 
+            && g_curStepInfo->id == id
+            && g_curStepInfo->flag == 1)
         {
             doNextStep = true;
         }
@@ -67,7 +66,7 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
         {
             g_curStepInfo++;
             g_stepCount--;
-            MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->count);
+            MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->cycle);
         }
     }
 }
@@ -75,6 +74,7 @@ static void sysMotorEventHandle(uint8_t id, MotorEvent_t event)
 static void sysEventHandle(uint8_t event, void *args)
 {
     MProtoStepInfo_t *stepInfo = NULL;
+    
     switch(event)
     {
     case SYS_EVENT_SELFCHECK:
@@ -84,7 +84,7 @@ static void sysEventHandle(uint8_t event, void *args)
         g_curStepInfo = stepInfo->step;
         g_stepCount = stepInfo->count - 1;
         g_sysStatus = SYS_STATUS_BUSY;
-        MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->count);
+        MotorStart(g_curStepInfo->id, g_curStepInfo->dir, g_curStepInfo->cycle);
         break;
     default:
         break;

@@ -75,8 +75,10 @@ static void controlOpt(uint8_t *contents)
         #if 0
             g_steps.step[n].id = steps[j++];
             g_steps.step[n].dir = steps[j++];
-            g_steps.step[n].count = steps[j++];
-            g_steps.step[n].count = (g_steps.step[n].count << 8) + steps[j++];
+            g_steps.step[n].flag = steps[j++];
+            g_steps.step[n].cycle[0] = steps[j++];
+            g_steps.step[n].cycle[1] = steps[j++];
+            //g_steps.step[n].count = (g_steps.step[n].count << 8) + steps[j++];
         #endif
             memcpy(&g_steps.step[n], &steps[j], sizeof(MProtoStep_t));
             j += sizeof(MProtoStep_t);
