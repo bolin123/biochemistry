@@ -3,10 +3,10 @@
 
 #define HAL_PULSE_INFO_NUM 2
 
-HalPulseInfo_t g_pulseConfig[HAL_PULSE_INFO_NUM];
-static uint8_t g_pulseCount[2];
-static uint32_t g_timerCount = 0;
-static MotorStepOver_cb g_pluseStepOverCb = NULL;
+static HAL_IDATA HalPulseInfo_t g_pulseConfig[HAL_PULSE_INFO_NUM];
+static HAL_IDATA uint8_t g_pulseCount[2];
+static HAL_IDATA uint32_t g_timerCount = 0;
+static HAL_IDATA MotorStepOver_cb g_pluseStepOverCb = NULL;
 
 void HalGpioPinValueSet(uint8_t io, uint8_t val)
 {
@@ -168,6 +168,8 @@ int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint16_t count, bool
     g_pulseConfig[index].count = count;
     g_pulseConfig[index].curNum = 0;
     g_pulseConfig[index].dir = dir;
+    g_pulseConfig[index].needShift = true;
+    g_pulseConfig[index].shiftCount = 0;
     //	g_pulseConfig[index].cb = cb;
     if(enable)
     {
@@ -201,7 +203,8 @@ int8_t HalPulseInfoSet(uint8_t index, MotorDirection_t dir, uint16_t count, bool
 void HalPulseStart(uint32_t period, MotorStepOver_cb cb)
 {
     float count = 11059200 / 12 / (period * 1000);
-    uint32_t timeCount = (uint32_t)count;
+    uint16_t timeCount = (uint16_t)count;
+//    uint16_t timeCount = 400;
 
     g_pluseStepOverCb = cb;
 
@@ -221,6 +224,16 @@ void HalPulseStop(void)
 
 #define HAL_MOTOR_VALID_LEVEL 0x0
 
+static uint8_t getShiftVal(uint8_t i)
+{
+    if(g_pulseConfig[i].curNum < ( g_pulseConfig[i].count / 10) || \
+        g_pulseConfig[i].curNum > (g_pulseConfig[i].count * 90 / 100))
+    {
+        return 2;
+    }
+    return 0;
+}
+
 void Time1_Int() interrupt 3
 {
     uint8_t i;
@@ -237,12 +250,32 @@ void Time1_Int() interrupt 3
             }
             else
             {
-                HalGpioPinValueSet(g_pulseConfig[i].ctrlPin, g_pulseConfig[i].val);
-                if(HAL_MOTOR_VALID_LEVEL == g_pulseConfig[i].val)
+                if(g_pulseConfig[i].needShift)
                 {
-                    g_pulseConfig[i].curNum++;
+                    if(g_pulseConfig[i].shiftCount >= getShiftVal(i))
+                    {
+                        g_pulseConfig[i].shiftCount = 0;
+                        HalGpioPinValueSet(g_pulseConfig[i].ctrlPin, g_pulseConfig[i].val);
+                        if(HAL_MOTOR_VALID_LEVEL == g_pulseConfig[i].val)
+                        {
+                            g_pulseConfig[i].curNum++;
+                        }
+                        g_pulseConfig[i].val = !g_pulseConfig[i].val;
+                    }
+                    else
+                    {
+                        g_pulseConfig[i].shiftCount++;
+                    }
                 }
-                g_pulseConfig[i].val = !g_pulseConfig[i].val;
+                else
+                {
+                    HalGpioPinValueSet(g_pulseConfig[i].ctrlPin, g_pulseConfig[i].val);
+                    if(HAL_MOTOR_VALID_LEVEL == g_pulseConfig[i].val)
+                    {
+                        g_pulseConfig[i].curNum++;
+                    }
+                    g_pulseConfig[i].val = !g_pulseConfig[i].val;
+                }
             }
         }
     }
@@ -263,7 +296,7 @@ uint8_t HalGetDevAddr(void)
 #endif
 }
 
-static HalUartRecv_cb g_uartRecvCb = NULL;
+static HAL_IDATA HalUartRecv_cb g_uartRecvCb = NULL;
 
 /*
 * serial init function, baudrate 9600bps

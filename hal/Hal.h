@@ -12,6 +12,8 @@ typedef struct
     uint8_t enablePin;  //使能管脚
     uint8_t dir; //方向
     uint8_t val;      //控制管脚高低电平
+    bool needShift;   //变速
+    uint8_t shiftCount;
     uint16_t count;    //设置总步数 (0为无限)
     uint16_t curNum;   //当前步数
     //	MotorStepOver_cb cb;  //设定步数完成回调函数

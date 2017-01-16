@@ -162,8 +162,8 @@
       <Focus>0</Focus>
       <ColumnNumber>59</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>19</TopLine>
-      <CurrentLine>20</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\STARTUP.A51</PathWithFileName>
       <FilenameWithoutPath>STARTUP.A51</FilenameWithoutPath>
@@ -174,10 +174,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>62</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>138</TopLine>
-      <CurrentLine>138</CurrentLine>
+      <TopLine>196</TopLine>
+      <CurrentLine>210</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\hal\Hal.c</PathWithFileName>
       <FilenameWithoutPath>Hal.c</FilenameWithoutPath>
@@ -197,8 +197,8 @@
       <Focus>0</Focus>
       <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>11</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\app\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
@@ -255,6 +255,32 @@
   </Group>
 
   <AlienFiles>
+    <PathWithFilename>C:\工作相关\全自动生化仪\software\biochemistry\HAL\HALCONFIG.H</PathWithFilename>
+    <TopLine>1</TopLine>
+    <CurrentLine>16</CurrentLine>
+    <Constant>0</Constant>
+    <WindowPosition>
+      <length>0</length>
+      <flags>0</flags>
+      <showCmd>0</showCmd>
+      <MinPosition>
+        <xPos>0</xPos>
+        <yPos>0</yPos>
+      </MinPosition>
+      <MaxPosition>
+        <xPos>0</xPos>
+        <yPos>0</yPos>
+      </MaxPosition>
+      <NormalPosition>
+        <Top>0</Top>
+        <Left>0</Left>
+        <Right>0</Right>
+        <Bottom>0</Bottom>
+      </NormalPosition>
+    </WindowPosition>
+  </AlienFiles>
+
+  <AlienFiles>
     <PathWithFilename>C:\工作相关\全自动生化仪\software\biochemistry\SYS\SYS.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>10</CurrentLine>
@@ -283,7 +309,7 @@
   <AlienFiles>
     <PathWithFilename>C:\工作相关\全自动生化仪\software\biochemistry\APP\MPROTO.H</PathWithFilename>
     <TopLine>14</TopLine>
-    <CurrentLine>28</CurrentLine>
+    <CurrentLine>24</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1673,7 +1699,7 @@
     <ActiveMDIGroup>0</ActiveMDIGroup>
     <MDIGroup>
       <Size>100</Size>
-      <ActiveTab>5</ActiveTab>
+      <ActiveTab>1</ActiveTab>
       <Documents>
         <Doc>
           <Name>..\..\sys\sys.c</Name>
@@ -1683,9 +1709,9 @@
         </Doc>
         <Doc>
           <Name>..\..\hal\Hal.c</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>138</TopLine>
-          <CurrentLine>138</CurrentLine>
+          <ColumnNumber>62</ColumnNumber>
+          <TopLine>196</TopLine>
+          <CurrentLine>210</CurrentLine>
         </Doc>
         <Doc>
           <Name>C:\KEIL\C51\INC\STC\STC89C5XRC.H</Name>
@@ -1707,15 +1733,21 @@
         </Doc>
         <Doc>
           <Name>..\..\APP\MPROTO.H</Name>
-          <ColumnNumber>40</ColumnNumber>
+          <ColumnNumber>21</ColumnNumber>
           <TopLine>14</TopLine>
-          <CurrentLine>28</CurrentLine>
+          <CurrentLine>24</CurrentLine>
         </Doc>
         <Doc>
           <Name>..\..\SYS\SYS.H</Name>
           <ColumnNumber>0</ColumnNumber>
           <TopLine>1</TopLine>
           <CurrentLine>10</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>..\..\HAL\HALCONFIG.H</Name>
+          <ColumnNumber>0</ColumnNumber>
+          <TopLine>1</TopLine>
+          <CurrentLine>16</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

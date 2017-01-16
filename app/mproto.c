@@ -7,15 +7,15 @@
 #define MPROTO_FRAME_PREAMBLE  0xbc
 #define MPROTO_DEFAULT_HOST_ADDR 0xfe
 
-static bool g_frameRecved = false;
-static uint8_t g_frameBuffer[MPROTO_FRAME_BUFFER_LEN] = {0};
-static uint8_t g_frameDataCount = 0;
-static uint8_t g_msgIndex = 0;
-static uint32_t	g_broadcastTime = 0;
-static bool g_broadcastFlag = false;
-static SysEvent_cb g_sysEventCb = NULL;
-static uint8_t g_controlIndex = 0;
-static MProtoStepInfo_t g_steps;
+static HAL_XDATA bool g_frameRecved = false;
+static HAL_IDATA uint8_t g_frameBuffer[MPROTO_FRAME_BUFFER_LEN] = {0};
+static HAL_IDATA uint8_t g_frameDataCount = 0;
+static HAL_XDATA uint8_t g_msgIndex = 0;
+static HAL_XDATA uint32_t	g_broadcastTime = 0;
+static HAL_XDATA bool g_broadcastFlag = false;
+static HAL_XDATA SysEvent_cb g_sysEventCb = NULL;
+static HAL_XDATA uint8_t g_controlIndex = 0;
+static HAL_XDATA MProtoStepInfo_t g_steps;
 
 static uint8_t checkFrame(const uint8_t *dat, uint8_t len)
 {

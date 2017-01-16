@@ -1,10 +1,10 @@
-C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 1   
+C51 COMPILER V9.00   MPROTO                                                                10/09/2016 22:17:11 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MPROTO
 OBJECT MODULE PLACED IN .\mproto.obj
-COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\..\app\mproto.c COMPACT BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEB
-                    -UG OBJECTEXTEND PRINT(.\mproto.lst) OBJECT(.\mproto.obj)
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\..\app\mproto.c LARGE BROWSE INCDIR(..\..\sys;..\..\app;..\..\hal) DEBUG
+                    - OBJECTEXTEND PRINT(.\mproto.lst) OBJECT(.\mproto.obj)
 
 line level    source
 
@@ -17,15 +17,15 @@ line level    source
    7          #define MPROTO_FRAME_PREAMBLE  0xbc
    8          #define MPROTO_DEFAULT_HOST_ADDR 0xfe
    9          
-  10          static bool g_frameRecved = false;
-  11          static uint8_t g_frameBuffer[MPROTO_FRAME_BUFFER_LEN] = {0};
-  12          static uint8_t g_frameDataCount = 0;
-  13          static uint8_t g_msgIndex = 0;
-  14          static uint32_t g_broadcastTime = 0;
-  15          static bool g_broadcastFlag = false;
-  16          static SysEvent_cb g_sysEventCb = NULL;
-  17          static uint8_t g_controlIndex = 0;
-  18          static MProtoStepInfo_t g_steps;
+  10          static HAL_XDATA bool g_frameRecved = false;
+  11          static HAL_IDATA uint8_t g_frameBuffer[MPROTO_FRAME_BUFFER_LEN] = {0};
+  12          static HAL_IDATA uint8_t g_frameDataCount = 0;
+  13          static HAL_XDATA uint8_t g_msgIndex = 0;
+  14          static HAL_XDATA uint32_t       g_broadcastTime = 0;
+  15          static HAL_XDATA bool g_broadcastFlag = false;
+  16          static HAL_XDATA SysEvent_cb g_sysEventCb = NULL;
+  17          static HAL_XDATA uint8_t g_controlIndex = 0;
+  18          static HAL_XDATA MProtoStepInfo_t g_steps;
   19          
   20          static uint8_t checkFrame(const uint8_t *dat, uint8_t len)
   21          {
@@ -62,7 +62,7 @@ line level    source
   52          void MProtoCtrlResult(MProtoResult_t result)
   53          {
   54   1          uint8_t dat[2];
-C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 2   
+C51 COMPILER V9.00   MPROTO                                                                10/09/2016 22:17:11 PAGE 2   
 
   55   1          dat[0] = g_controlIndex;
   56   1          dat[1] = result;
@@ -126,7 +126,7 @@ line level    source
  114   2              if(byte != SysGetDevAddr() && byte != 0xff)
  115   2              {
  116   3                  g_frameDataCount = 0;
-C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 3   
+C51 COMPILER V9.00   MPROTO                                                                10/09/2016 22:17:11 PAGE 3   
 
  117   3              }
  118   2              break;
@@ -190,7 +190,7 @@ line level    source
  176   3                  break;
  177   3              case MPROTO_CMD_QUERY:
  178   3                  break;
-C51 COMPILER V9.00   MPROTO                                                                07/18/2016 22:42:55 PAGE 4   
+C51 COMPILER V9.00   MPROTO                                                                10/09/2016 22:17:11 PAGE 4   
 
  179   3              default:
  180   3                  break;
@@ -225,11 +225,11 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    868    ----
+   CODE SIZE        =    933    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =    106      94
-   DATA SIZE        =   ----    ----
+   XDATA SIZE       =     51      94
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     65    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

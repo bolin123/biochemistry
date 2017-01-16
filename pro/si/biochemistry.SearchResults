@@ -1,2 +1,5 @@
----- motorCtrl_t Matches (1 in 1 files) ----
-Mproto.h (app):}motorCtrl_t;
+---- g_stepCount Matches (4 in 1 files) ----
+Sys.c (software\biochemistry\sys):static uint8_t g_stepCount = 0;
+Sys.c (software\biochemistry\sys):        if(g_stepCount == 0)
+Sys.c (software\biochemistry\sys):            g_stepCount--;
+Sys.c (software\biochemistry\sys):        g_stepCount = stepInfo->count - 1;

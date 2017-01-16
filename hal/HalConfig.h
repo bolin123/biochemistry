@@ -1,6 +1,9 @@
 #ifndef HAL_CONFIG_H
 #define HAL_CONFIG_H
 
+#define HAL_IDATA data
+#define HAL_XDATA xdata
+
 /*是否使用硬件地址*/
 #define HAL_USE_HARDWARE_ADDR 0 // 1
 
@@ -13,7 +16,7 @@
 #endif
 
 /*电机旋转周期*/
-#define HAL_MOTOR_CYCLE_TIME  4 //2ms
+#define HAL_MOTOR_CYCLE_TIME  1 //2ms
 
 /*无效管脚*/
 #define HAL_GPIO_INVALID 0xff

@@ -3,9 +3,9 @@
 
 #define MOTOR_NUM 2 //控制电机总数
 
-static uint8_t g_motorNum = 0;
-static MotorSensorTriggered g_sensorTriggered[MOTOR_NUM] = {0};
-static MotorEventHandle g_eventCb = NULL;
+static HAL_XDATA uint8_t g_motorNum = 0;
+static HAL_XDATA MotorSensorTriggered g_sensorTriggered[MOTOR_NUM] = {0};
+static HAL_XDATA MotorEventHandle g_eventCb = NULL;
 
 static void motorStepOverHandle(uint8_t id)
 {

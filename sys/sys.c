@@ -2,9 +2,9 @@
 #include "motor.h"
 #include "mproto.h"
 
-static MProtoStep_t *g_curStepInfo = NULL;
-static uint8_t g_stepCount = 0;
-static bool g_sysStatus = SYS_STATUS_IDLE;
+static HAL_XDATA MProtoStep_t *g_curStepInfo = NULL;
+static HAL_XDATA uint8_t g_stepCount = 0;
+static HAL_XDATA bool g_sysStatus = SYS_STATUS_IDLE;
 
 static bool sysMotor1SensorTriggered(void)
 {

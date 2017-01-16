@@ -4,7 +4,7 @@
 #include "Sys.h"
 
 //电机操作最大步骤数
-#define MPROTO_MAX_STEPS_COUNT 6
+#define MPROTO_MAX_STEPS_COUNT 8
 
 //协议头
 typedef struct
